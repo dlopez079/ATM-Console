@@ -1,3 +1,6 @@
+const xObj = require('./js/script.js');
+console.log(xObj);
+
 var http = require('http');
 var fs = require('fs');
 http.createServer(function (req, res) {
