@@ -33,6 +33,20 @@ const server = http.createServer((req, res) => {
       }
     );
   }
+
+  // ROUTE TO DEVIVERY API USING JUST NODE.
+  if (req.url === "/api/users") {
+
+    // Fetch data from a data base.
+    const users = [
+      { name: 'David Lopez', age: 42 },
+      { name: 'David Lopez', age: 42 }
+    ];
+
+    res.writeHead(200, { "Content-Type": "text/html" }); // Set tht type of the file that will display.
+    res.end(JSON.stringify(users));
+  }
+
 });
 
 const PORT = process.env.PORT || 5000;
