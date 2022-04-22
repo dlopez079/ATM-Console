@@ -1,9 +1,15 @@
-var http = require('http');
-var fs = require('fs');
-http.createServer(function (req, res) {
-  fs.readFile('index.html', function(err, data) {
-    res.writeHead(200, {'Content-Type': 'text/html,'});
-    res.write(data);
-    return res.end();
-  });
-}).listen(8080);
+const http = require('http');
+const path = require('path');
+const fs = require('fs');
+
+const server = http.createServer((req, res) => {
+  if(req.url === "/") {
+    res.writeHead(200, { 'Content-Type': 'text/html' });  // Set tht type of the file that will display.
+    res.end('<h1>Home</h2>');
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+
+// Listen to the port and console.log that the site is running on the current port.
+server.listen(PORT, ()=> console.log(`Server running on port ${PORT}`));
