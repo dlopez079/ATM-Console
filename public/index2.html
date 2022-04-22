@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lopez Bank</title>
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    
+</head>
+<body>
+    <h1>Welcome to Lopez Bank</h1>
+
+    
+    <nav> 
+        <ul>
+            <!-- Login and Register account div -->
+            <li><a id="login" onclick="login()">Login</a></li>
+
+            <!-- A register button for users that do not have a  -->
+            <li><a id="register" onclick="register()">Register</a></li>
+            
+        </ul>
+        
+    </nav>
+
+    <br>
+
+    <!-- Dynamic Message -->
+    <div id="dynamicMessage"></div>
+
+    <br>
+
+    <!-- Register Form -->
+    <div id="registerForm">
+        <h3>Register</h3>
+
+            <!-- First Name Field -->
+            <label for="getFirstName">First Name</label>
+            <input type="text" id="getFirstName" name="getFirstName">
+
+            <!-- Last Name Field -->
+            <label for="getLastName">Last Name</label>
+            <input type="text" id="getLastName" name="getLastName">
+
+            <!-- Username Field -->
+            <label for="getUsername">Username</label>
+            <input type="text" id="getUsername" name="getUsername">
+
+            <!-- PIN Field -->
+            <label for="getPin">Pin</label>
+            <input type="text" id="getPin" name="getPin">
+    
+            <button onclick="registerUser()" type="button">
+                Register
+            </button>
+
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+        <h3>Login:</h3>
+            <!-- Username Field -->
+            <label for="getUsername">Username</label>
+            <input type="text" id="getUsername" name="getUsername">
+
+            <!-- Last Name Field -->
+            <label for="getPin">Pin</label>
+            <input type="text" id="getPin" name="getPin">
+    
+            <button onclick="registerUser()" type="button">
+                Register
+            </button>
+    </div>
+
+    <!-- Account Transaction Form -->
+    <div id="transactionForm">
+        <h3>Balance: <span id="balanceAmt"></span></h3>
+            <!-- Deposit Field -->
+            <label for="depositfAmt">Deposit</label>
+            <input type="number" id="depositAmt" name="depositAmt">
+    
+            <button onclick="depositAmount()" type="button">
+                Deposit Funds
+            </button>
+
+            <br>
+
+            <!-- Withdraw Field -->
+            <label for="withdrawAmt">Withdraw</label>
+            <input type="number" id="withdrawAmt" name="withdrawAmt">
+    
+            <button onclick="withdrawAmount()" type="button">
+                Withdraw Funds
+            </button>
+    </div>
+
+    <script src="js/script.js" type="text/script"></script>
+</body>
+</html>
