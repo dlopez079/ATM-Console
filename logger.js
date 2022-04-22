@@ -6,7 +6,7 @@ const uuid = require('uuid');  // Creates a random ID
 class Logger extends EventEmitter {
     log(msg) {
         // Call Event
-        this.emit('message', {id: uuid.v4(), msg });
+        this.emit('message', { id: uuid.v4(), msg });
     }
 }
 
