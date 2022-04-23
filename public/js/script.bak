@@ -193,8 +193,3 @@ function withdrawAmount() {
 
 // Export person example from this js file.
 // Create the object
-const xObj = {
-  name: "David Lopez", 
-  status: "Sucess"
-}
-module.exports = xObj;
