@@ -64,6 +64,17 @@ function displayLoginForm() {
 
 }
 
+// Display Accounts Dashboard
+function displayDashboard() {
+
+  // Save form IDs to a variable.
+  let dashboard = document.getElementById('dashboard');
+  let loginForm = document.getElementById('loginForm');
+  
+  loginForm.style.display = "none";
+  dashboard.style.display = "block";
+}
+
 // Submit Button for JSON
 function submit() {
 
@@ -85,38 +96,55 @@ function loginUser() {
   let username = document.getElementById('username').value;
   let pin = document.getElementById('pin').value;
   
-  console.log(`Login Capture Values: ${username} and ${pin}`)
-  // fetch ('../../users.json')
-  //   .then(x => x.text())
-  //   .then(y => console.log = y); 
-  
+  // Loop through the Users Array to gain access to the object information.
   for(let i=0; i < users.length; i++) {
 
-    if(username === users[i].username && pin === users[i].pin) {
+    // Check to see if the username that was entered matches the username in the object.
+    if(username === users[i].username) {
 
-      console.log(`If statement to check in log in credentials against 'Users' is working!`);
+      // Console.log to show that the username and pin match.  SHOULD DELETE LATER.
+      console.log(`USERNAME AND PIN MATCH: ${username} & ${users[i].username} and ${pin} & ${users[i].pin}`)
+
+      // Check to see if the pin matches.
+      if(pin === users[i].pin) {
+      
+      // Console.log to show that the pin is correct.  SHOULD DELETE LATER.
+      console.log(`CORRECT PIN: ${pin} & ${users[i].pin}`)
+
+      // Change Dyamic Message to welcome
+      document.getElementById('dynamicMessage').innerHTML = `Welcome ${users[i]['firstName']} ${users[i].lastName}`;
+      
+      // Console.log to show the account is fully verified.  SHOULD DELETE LATER.
+      console.log(`Account Verified for ${users[i]['firstName']} ${users[i].lastName}`)
+
       // Change Dyamic Message to welcome
       document.getElementById('dynamicMessage').innerHTML = `Welcome ${users[i].firstName}!`;
-      displayLoginForm();
-
-      // Remove Login div.
-      let loginForm = document.getElementById('loginForm');
-      loginForm.style.display = "none";
       
-      // Display Users Accounts and balances with displayAccounts function.
+
+      // *****
+      // Remove Login div.  NEEDS TO BE WORKED ON.
+      displayDashboard()
+
+      // *****
+      // Display Users Accounts and balances with displayAccounts function  NEEDS TO BE WORKED ON. 
+      // INSERT A FUNCTION TO THAT WILL DISPLAY ACCOUNTS.!!!!!!
+      // *****
+      } else {
+        // Verify that the pin is correct.
+      console.log(`INCORRECT PIN: ${pin} & ${users[i].pin}`)
+      }
 
     } else {
-      
-      // Change Dyamic Message to welcome
-      document.getElementById('dynamicMessage').innerHTML = "Incorrect Credentials: Please Re-enter Your Credentials!";
-      displayLoginForm();
-
-      // Capture the values from the form fields.
-      document.getElementById('username').value = '';
-      document.getElementById('pin').value='';
+      document.getElementById('dynamicMessage').innerHTML = `Incorrect Password!`;
     }
+    
   }
 
+  // Capture the values from the form fields.
+  document.getElementById('username').value = '';
+  document.getElementById('pin').value='';
+
+  
 }
 
 // Create function to add users to JSON.
