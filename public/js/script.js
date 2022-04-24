@@ -89,24 +89,31 @@ function loginUser() {
   // fetch ('../../users.json')
   //   .then(x => x.text())
   //   .then(y => console.log = y); 
-   
+  
   for(let i=0; i < users.length; i++) {
-    let user =+ users[i];
 
     if(username === users[i].username && pin === users[i].pin) {
+
+      console.log(`If statement to check in log in credentials against 'Users' is working!`);
       // Change Dyamic Message to welcome
-      document.getElementById('dynamicMessage').innerHTML = `Account #: ${users[i]} \n Welcome ${users[i].firstName}!`;
+      document.getElementById('dynamicMessage').innerHTML = `Welcome ${users[i].firstName}!`;
       displayLoginForm();
 
       // Remove Login div.
+      let loginForm = document.getElementById('loginForm');
+      loginForm.style.display = "none";
+      
+      // Display Users Accounts and balances with displayAccounts function.
 
-      // Display Users Accounts and balances
-      // Users must have at least one account.
     } else {
       
       // Change Dyamic Message to welcome
-      document.getElementById('dynamicMessage').innerHTML = "Incorrect Credentials: Re-enter Your Credentials!";
+      document.getElementById('dynamicMessage').innerHTML = "Incorrect Credentials: Please Re-enter Your Credentials!";
       displayLoginForm();
+
+      // Capture the values from the form fields.
+      document.getElementById('username').value = '';
+      document.getElementById('pin').value='';
     }
   }
 
