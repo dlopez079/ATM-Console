@@ -1,5 +1,27 @@
-const path = require("path");
-const fs = require("fs");
+/* 
+Fetch the users data located on a JSON file within the same folder as this javascript file.  Normally, JSON files are used for configurrations rather than data but we are going to use to use for data since we don't have much data to work with.  This fetch file will only work if your application is running on a local develoment server like "Live Server". 
+https://www.w3schools.com/js/js_api_fetch.asp
+*/
+fetch('./users.json')
+.then(function(resp) {
+  console.log(resp);
+})
+.then(function(data) {
+  // console.log(data);
+});
+
+// fetch('./accounts.json')
+// .then(function(resp) {
+//   return resp.json();
+// })
+// .then(function(data) {
+//   console.log(data.accounts);
+//   const accounts = data.accounts;
+// });
+
+const users = [];
+const userJSON = JSON.stringify(users, null, 3);
+// console.log(userJSON);
 
 // Create a function for register
 function loginNavLink() {
@@ -61,46 +83,64 @@ function loginUser() {
 
   // Capture the values from the form fields.
   let username = document.getElementById('username').value;
+  let pin = document.getElementById('pin').value;
   
-  console.log(username)
+  console.log(`Login Capture Values: ${username} and ${pin}`)
+  // fetch ('../../users.json')
+  //   .then(x => x.text())
+  //   .then(y => console.log = y); 
    
-  // If user does not exist, ask them to register.
-  // if(username != users.username) {
-  //   // Change Dyamic Message to welcome
-  //   document.getElementById('dynamicMessage').innerHTML = "Check Spelling or register your account!";
-  //   displayRegisterForm();
-  // }
-  // else check user pin.
+  for(let i=0; i < users.length; i++) {
+    let user =+ users[i];
+
+    if(username === users[i].username && pin === users[i].pin) {
+      // Change Dyamic Message to welcome
+      document.getElementById('dynamicMessage').innerHTML = `Account #: ${users[i]} \n Welcome ${users[i].firstName}!`;
+      displayLoginForm();
+
+      // Remove Login div.
+
+      // Display Users Accounts and balances
+      // Users must have at least one account.
+    } else {
+      
+      // Change Dyamic Message to welcome
+      document.getElementById('dynamicMessage').innerHTML = "Incorrect Credentials: Re-enter Your Credentials!";
+      displayLoginForm();
+    }
+  }
 
 }
 
-
-
-
-
-
-
-
 // Create function to add users to JSON.
 function registerUser() {
-
+  
   // Capture the values from the form fields.
   let firstName = document.getElementById('getFirstName').value;
   let lastName = document.getElementById('getLastName').value;
   let username = document.getElementById('getUsername').value;
   let pin = document.getElementById('getPin').value;
   
-  console.log(firstName + lastName + username + pin);
-  
-  // Retreive Users JSON.
-  fs.readFile(path.join(__dirname, '../json', 'users.json'), 'utf8', (err,data) => {
-    if(err) throw err; // If there is an error, this function will let you know.
-    console.log(data); // Verify that I can pull the data.  
-  });
+  // Add user to Users Object
+  let user = {
+    "firstName": firstName,
+    "lastName": lastName,
+    "username": username,
+    "pin": pin
+  }
 
+  // Push User Information into array.
+  users.push(user);
+
+  console.table(users);
+
+  document.getElementById('getFirstName').value = '';
+  document.getElementById('getLastName').value = '';
+  document.getElementById('getUsername').value = '';
+  document.getElementById('getPin').value = '';
 }
 
-module.exports = registerUser;
+
 
 
 
