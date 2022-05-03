@@ -60,19 +60,19 @@
 
         <!-- Checking Account Field -->
         <label for="getChecking">Checking</label>
-        <input type="float" id="getChecking" name="getChecking" value="0.00">
+        <input type="text" id="getChecking" name="getChecking" value="0.00">
 
         <!-- Saving Account Field -->
         <label for="getSaving">Saving</label>
-        <input type="float" id="getSaving" name="getSaving" value="0.00">
+        <input type="text" id="getSaving" name="getSaving" value="0.00">
 
         <!-- Credit Account Field -->
         <label for="getCredit">Credit Card</label>
-        <input type="float" id="getCredit" name="getCredit" value="0.00">
+        <input type="text" id="getCredit" name="getCredit" value="0.00">
 
         <!-- Loan Account Field -->
         <label for="getLoan">Loan</label>
-        <input type="float" id="getLoan" name="getLoan" value="0.00">
+        <input type="text" id="getLoan" name="getLoan" value="0.00">
 
         <button onclick="registerUser()" type="button" value="0.00">
             Register
@@ -110,7 +110,11 @@
         <br>
         <!-- Deposit Field -->
         <label for="depositAmt">Amount</label>
-        <input type="float" id="depositAmt" name="depositAmt" value="0.00">
+        <input type="text" id="depositAmt" name="depositAmt" value="0.00">
+
+        <!-- Deposit Field -->
+        <label for="getRecentDesc">Description</label>
+        <input type="text" id="getRecentDesc" name="getRecentDesc" placeholder="Short Description">
 
         <button onclick="deposit()" type="button">
             Deposit Funds
@@ -132,7 +136,7 @@
         <br>
         <!-- Withdraw Field -->
         <label for="withdrawAmt">Amount</label>
-        <input type="float" id="withdrawAmt" name="withdrawAmt" value="0.00">
+        <input type="text" id="withdrawAmt" name="withdrawAmt" value="0.00">
 
         <button onclick="withdrawAmount()" type="button">
             Withdraw Funds
@@ -163,7 +167,7 @@
         <br>
         <!-- Withdraw Field -->
         <label for="transferAmt">Amount</label>
-        <input type="float" id="transferAmt" name="transferAmt" value="0.00">
+        <input type="text" id="transferAmt" name="transferAmt" value="0.00">
 
         <button onclick="withdrawAmount()" type="button">
             Withdraw Funds
@@ -195,7 +199,7 @@
             <tr>
                 <td>Checking</td>
                 <td id="checkingAmt"></td>
-                <td></td>
+                <td id="recentChDesc"></td>
             </tr>
             <tr>
                 <td>Savings</td>

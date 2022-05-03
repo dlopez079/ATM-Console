@@ -75,46 +75,64 @@ function displayDashboard() {
 }
 
 /**
- * Function to display the deposit form so users can register their information into the array's table.
- */
- function displayDepositForm() {
-
-  // Display register message.
-  let dashboard = document.getElementById('dashboard');
-  let depositForm = document.getElementById('depositForm');
-  
-  depositForm.style.display = "block";
-  dashboard.style.display = "none";
-
-}
-
-/**
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
  function displayDepositForm() {
 
-  // Display register message.
- 
+  // Capture form ID from DOM.
   let depositForm = document.getElementById('depositForm');
   
+  // depositForm div is currently set to none which hides the element.
+  // Change the display style to block so element is viewable.
   depositForm.style.display = "block";
-  
-
 }
 
+/**
+ * Function to remove withdrawal display form.
+ */
 function removeDepositForm() {
+
+  // Capture form ID from DOM.
   let depositForm = document.getElementById('depositForm');
   
+  // depositForm div is currently set to block which displays the element.
+  // change the display style to none so element is NOT viewable.
   depositForm.style.display = "none";
 }
 
 /**
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
- function displayWithdawalForm() {
+ function displayWithdrawalForm() {
 
-  // Display register message.
-  let dashboard = document.getElementById('dashboard');
+  // Capture form ID from DOM
+  let withdrawalForm = document.getElementById('withdrawalForm');
+  
+  // withdrawalForm div is currently set to none which hides the element.
+  // Change the display style to block so element is viewable.
+  withdrawalForm.style.display = "block";
+}
+
+/**
+ * Function to display the withdrawal form so users can withdraw from their accounts.
+ */
+ function removeWithdrawalForm() {
+
+  // Capture form ID from DOM.
+  let withdrawalForm = document.getElementById('withdrawForm');
+  
+  // withdrawalForm div is currently set to block which displays the element.
+  // change the display style to none so element is NOT viewable.
+  withdrawalForm.style.display = "none";
+  
+}
+
+/**
+ * Function to display the withdrawal form so users can withdraw from their accounts.
+ */
+ function displayTransferForm() {
+
+  // Display register message
   let withdrawalForm = document.getElementById('withdrawalForm');
   
   withdrawalForm.style.display = "block";
@@ -122,6 +140,14 @@ function removeDepositForm() {
 
 }
 
+/**
+ * Function to display the withdrawal form so users can withdraw from their accounts.
+ */
+ function removeTransferForm() {
+  let withdrawForm = document.getElementById('withdrawForm');
+  
+  withdrawForm.style.display = "none";
+}
 
 /**
  * Function to log in user using the information they entered in the Users Array.
@@ -264,31 +290,44 @@ function depositDashNavLink() {
 
 function deposit() {
   // Retrieve all accounts for logged in user.
-  let checkingBalance = users[0].checking;
+  let checkingBalance = Number(users[0].checking);
   let savingBalance = users[0].saving;
   let creditBalance = users[0].credit;
   let loanBalance = users[0].loan;
 
   // Retrieve input values
   let account = document.getElementById('depositFormAccount').value;
-  let depositAmt = document.getElementById('depositAmt').value;
+  let depositAmt = Number(document.getElementById('depositAmt').value);
+  let getRecentDesc = document.getElementById('getRecentDesc').value;
   
-  console.log(account);
-  console.log(depositAmt);
-  console.log(typeOf(checkingBalance));
+  // Console Verification
+  let total = checkingBalance + depositAmt;
+  console.table({
+    "Balance": checkingBalance, 
+    "Deposit": depositAmt, 
+    "Desc": getRecentDesc,
+    "Total": total
+  });
+
 
   // Created a switch to taking in account and perform the operations accordingly.
   switch (account) {
     case 'checking':
 
       // Perform the Math
-      let newCheckingBal = depositAmt + checkingBalance;
+      let newCheckingBal = checkingBalance + depositAmt;
 
-      // Display Checking Amount
+      // Change the value of he checking account on table.
       users[0].checking = newCheckingBal;
 
-      // Display Saving Amount
-      document.getElementById('checkingAmt').innerHTML = `$${users[0].checking}`;
+      // Display Checking Amount
+      document.getElementById('checkingAmt').innerHTML = users[0].checking;
+      
+      // Display Recent Description
+      document.getElementById('recentChDesc').innerHTML = getRecentDesc;
+      
+      // Remove Deposit Display from DOM
+      removeDepositForm();
       break;
 
     case 'saving':
