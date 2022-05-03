@@ -75,6 +75,55 @@ function displayDashboard() {
 }
 
 /**
+ * Function to display the deposit form so users can register their information into the array's table.
+ */
+ function displayDepositForm() {
+
+  // Display register message.
+  let dashboard = document.getElementById('dashboard');
+  let depositForm = document.getElementById('depositForm');
+  
+  depositForm.style.display = "block";
+  dashboard.style.display = "none";
+
+}
+
+/**
+ * Function to display the withdrawal form so users can withdraw from their accounts.
+ */
+ function displayDepositForm() {
+
+  // Display register message.
+ 
+  let depositForm = document.getElementById('depositForm');
+  
+  depositForm.style.display = "block";
+  
+
+}
+
+function removeDepositForm() {
+  let depositForm = document.getElementById('depositForm');
+  
+  depositForm.style.display = "none";
+}
+
+/**
+ * Function to display the withdrawal form so users can withdraw from their accounts.
+ */
+ function displayWithdawalForm() {
+
+  // Display register message.
+  let dashboard = document.getElementById('dashboard');
+  let withdrawalForm = document.getElementById('withdrawalForm');
+  
+  withdrawalForm.style.display = "block";
+  dashboard.style.display = "none";
+
+}
+
+
+/**
  * Function to log in user using the information they entered in the Users Array.
  * [ ] We need to add information for the users accounts.
  */
@@ -206,32 +255,82 @@ function registerUser() {
  * Function to transfer funds from one account to another account.
  */
 function depositDashNavLink() {
-  // Retrieve all accounts for logged in user.
 
-  // Select the "FROM" account.
+  // Display transaction form
+  displayDepositForm();
 
-  // Select the "TO" account.
-
-  // Save Transfer Amount from DOM.
-  let transferAmount = document.getElementById('transferAmount').value
-
-  // Retreive the balance of the "FROM" account and subtract the amount you want to transfer.
-
-  // Retreive the balance of the "TO" account and add the amount you want to transfer.
+  
 }
 
+function deposit() {
+  // Retrieve all accounts for logged in user.
+  let checkingBalance = users[0].checking;
+  let savingBalance = users[0].saving;
+  let creditBalance = users[0].credit;
+  let loanBalance = users[0].loan;
+
+  // Retrieve input values
+  let account = document.getElementById('depositFormAccount').value;
+  let depositAmt = document.getElementById('depositAmt').value;
+  
+  console.log(account);
+  console.log(depositAmt);
+  console.log(typeOf(checkingBalance));
+
+  // Created a switch to taking in account and perform the operations accordingly.
+  switch (account) {
+    case 'checking':
+
+      // Perform the Math
+      let newCheckingBal = depositAmt + checkingBalance;
+
+      // Display Checking Amount
+      users[0].checking = newCheckingBal;
+
+      // Display Saving Amount
+      document.getElementById('checkingAmt').innerHTML = `$${users[0].checking}`;
+      break;
+
+    case 'saving':
+      let newSavingBal = depositAmt + savingBalance;
+
+      // Display Saving Amount
+      document.getElementById('savingAmt').innerHTML = `$${newSavingBal}`;
+      break;
+
+    case 'credit':
+      let newCreditBal = depositAmt + creditBalance;
+
+      // Display Credit Amount
+      document.getElementById('creditAmt').innerHTML = `$${newCreditBal}`;
+      break;
+
+    case 'loan':
+      let newLoanBal = depositAmt + loanBalance;
+
+      // Display Loan Amount
+      document.getElementById('loanAmt').innerHTML = `$${newLoanBal}`;
+      break;
+  
+    default:
+      break;
+  }
+  
+  // Change Dyamic Message to welcome
+  document.getElementById('dynamicMessage').innerHTML = `Successful Deposit!`;
+  
+}
 /**
- * Function to deposit ammount into one of the user's account.  Users should open account with at least 1 account active.
+ * Function to withdraw ammount into one of the user's account.  Users should open account with at least 1 account active.
  */
-function registerDashNavLink() {
+function withdrawDashNavLink() {
   // Retrieve Balance
-  // Loop through the table
   let currentBalance = accounts[0].balance;
 
-  let deposit = parseInt(document.getElementById("depositAmt").value);
+  let withdraw = parseInt(document.getElementById("withdrawAmt").value);
 
   // 1000.00 + 100.00
-  let newBalance = currentBalance + deposit;
+  let newBalance = currentBalance - withdraw;
   console.log(newBalance)
 
   // Change Balance
@@ -239,13 +338,13 @@ function registerDashNavLink() {
   console.table(accounts);
 
   document.getElementById('balanceAmt').innerHTML = newBalance;
-  document.getElementById("depositAmt").value = "";
+  document.getElementById("withdrawAmt").value = "";
 }
 
 /**
- * Function to withdraw ammount into one of the user's account.  Users should open account with at least 1 account active.
+ * Function to transfer ammount into one of the user's account.  Users should open account with at least 1 account active.
  */
-function transferDashNavLink() {
+ function transferDashNavLink() {
   // Retrieve Balance
   let currentBalance = accounts[0].balance;
 

@@ -16,12 +16,12 @@
     <!-- Hero -->
     <div class="hero-image">
         <div class="hero-text">
-          <h1>Lopez Bank</h1>
-          <p>Best Bank Ever</p>
+            <h1>Lopez Bank</h1>
+            <p>Best Bank Ever</p>
         </div>
     </div>
 
-      <nav>
+    <nav>
         <ul>
             <!-- Login and Register account div -->
             <li><a id="login" type="button" onclick="loginNavLink()">Login</a></li>
@@ -37,7 +37,6 @@
 
     <!-- Dynamic Message -->
     <div id="dynamicMessage"></div>
-
 
     <!-- Register Form -->
     <div id="registerForm">
@@ -97,22 +96,74 @@
         </button>
     </div>
 
-    <!-- Account Transaction Form -->
-    <div id="transactionForm">
-        <h3>Balance: <span id="balanceAmt"></span></h3>
-        <!-- Deposit Field -->
-        <label for="depositfAmt">Deposit</label>
-        <input type="number" id="depositAmt" name="depositAmt">
+    <!-- Account Deposit Form -->
+    <div id="depositForm">
 
-        <button onclick="depositAmount()" type="button">
+        <!-- Select Account -->
+        <label for="depositFormAccount">Which Account: </label>
+        <select name="depositFormAccount" id="depositFormAccount">
+            <option value="checking">checking</option>
+            <option value="saving">saving</option>
+            <option value="credit">credit</option>
+            <option value="loan">loan</option>
+        </select>
+        <br>
+        <!-- Deposit Field -->
+        <label for="depositAmt">Amount</label>
+        <input type="float" id="depositAmt" name="depositAmt" value="0.00">
+
+        <button onclick="deposit()" type="button">
             Deposit Funds
         </button>
 
-        <br>
+    </div>
 
+    <!-- Account Withdrawal Form -->
+    <div id="withdrawalForm">
+
+        <!-- Select Account -->
+        <label for="withdrawForm"></label>
+        <select name="withdrawForm" id="withdrawForm">
+            <option value="checkingWithdraw">checking</option>
+            <option value="savingWithdraw">saving</option>
+            <option value="creditWithdraw">credit</option>
+            <option value="loanWithdraw">loan</option>
+        </select>
+        <br>
         <!-- Withdraw Field -->
-        <label for="withdrawAmt">Withdraw</label>
-        <input type="number" id="withdrawAmt" name="withdrawAmt">
+        <label for="withdrawAmt">Amount</label>
+        <input type="float" id="withdrawAmt" name="withdrawAmt" value="0.00">
+
+        <button onclick="withdrawAmount()" type="button">
+            Withdraw Funds
+        </button>
+
+    </div>
+
+    <!-- Account Transfer Form -->
+    <div id="transferForm">
+       
+        <!-- Select Account to transfer to -->
+        <label for="transferTo"></label>
+        <select name="transferTo" id="transferTo">
+            <option value="checkingTransferTo">checking</option>
+            <option value="savingTransferTo">saving</option>
+            <option value="creditTransferTo">credit</option>
+            <option value="loanTransferTo">loan</option>
+        </select>
+
+        <!-- Select Account to transfer from-->
+        <label for="transferFrom"></label>
+        <select name="transferFrom" id="transferFrom">
+            <option value="checkingTransferFrom">checking</option>
+            <option value="savingTransferFrom">saving</option>
+            <option value="creditTransferFrom">credit</option>
+            <option value="loanTransferFrom">loan</option>
+        </select>
+        <br>
+        <!-- Withdraw Field -->
+        <label for="transferAmt">Amount</label>
+        <input type="float" id="transferAmt" name="transferAmt" value="0.00">
 
         <button onclick="withdrawAmount()" type="button">
             Withdraw Funds
@@ -124,16 +175,16 @@
         <nav>
             <ul>
                 <!-- Deposit -->
-                <li><a id="login" type="button" onclick="depositDashNavLink()">Deposit</a></li>
-    
+                <li><a id="depositDashNavLink" type="button" onclick="depositDashNavLink()">Deposit</a></li>
+
                 <!-- Withdrawal  -->
-                <li><a id="register" onclick="registerDashNavLink()">Withdrawal</a></li>
+                <li><a id="withdrawDashNavLink" onclick="withdrawDashNavLink()">Withdrawal</a></li>
 
                 <!-- Transfer  -->
-                <li><a id="register" onclick="transferDashNavLink()">Transfer</a></li>
-    
+                <li><a id="transferDashNavLink" onclick="transferDashNavLink()">Transfer</a></li>
+
             </ul>
-    
+
         </nav>
         <table>
             <tr>
@@ -161,9 +212,10 @@
                 <td id="loanAmt"></td>
                 <td>Mortgage</td>
             </tr>
-            
+
         </table>
 
+        <div id="transaction"></div>
     </div>
 </body>
 

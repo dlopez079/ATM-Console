@@ -1,7 +1,10 @@
 #transactionForm,
 #registerForm,
 #loginForm,
-#dashboard {
+#dashboard,
+#depositForm,
+#withdrawalForm,
+#transferForm {
   display: none;
 }
 
