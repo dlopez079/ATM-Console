@@ -59,7 +59,23 @@
         <label for="getPin">Pin</label>
         <input type="text" id="getPin" name="getPin">
 
-        <button onclick="registerUser()" type="button">
+        <!-- Checking Account Field -->
+        <label for="getChecking">Checking</label>
+        <input type="float" id="getChecking" name="getChecking" value="0.00">
+
+        <!-- Saving Account Field -->
+        <label for="getSaving">Saving</label>
+        <input type="float" id="getSaving" name="getSaving" value="0.00">
+
+        <!-- Credit Account Field -->
+        <label for="getCredit">Credit Card</label>
+        <input type="float" id="getCredit" name="getCredit" value="0.00">
+
+        <!-- Loan Account Field -->
+        <label for="getLoan">Loan</label>
+        <input type="float" id="getLoan" name="getLoan" value="0.00">
+
+        <button onclick="registerUser()" type="button" value="0.00">
             Register
         </button>
 
@@ -107,11 +123,14 @@
         <h4>Accounts</h4>
         <nav>
             <ul>
-                <!-- Login and Register account div -->
-                <li><a id="login" type="button" onclick="deposit()">Deposit</a></li>
+                <!-- Deposit -->
+                <li><a id="login" type="button" onclick="depositDashNavLink()">Deposit</a></li>
     
-                <!-- A register button for users that do not have a  -->
-                <li><a id="register" onclick="registerNavLink()">Withdrawal</a></li>
+                <!-- Withdrawal  -->
+                <li><a id="register" onclick="registerDashNavLink()">Withdrawal</a></li>
+
+                <!-- Transfer  -->
+                <li><a id="register" onclick="transferDashNavLink()">Transfer</a></li>
     
             </ul>
     
@@ -124,24 +143,25 @@
             </tr>
             <tr>
                 <td>Checking</td>
-                <td>$100.00</td>
+                <td id="checkingAmt"></td>
                 <td></td>
             </tr>
             <tr>
                 <td>Savings</td>
-                <td>$500.00</td>
+                <td id="savingAmt"></td>
                 <td></td>
             </tr>
             <tr>
-                <td>Loan</td>
-                <td>$543,451.00</td>
-                <td>Mortgage</td>
-            </tr>
-            <tr>
                 <td>Credit Card</td>
-                <td>$450.00</td>
+                <td id="creditAmt"></td>
                 <td>Cash Back Rewards</td>
             </tr>
+            <tr>
+                <td>Loan</td>
+                <td id="loanAmt"></td>
+                <td>Mortgage</td>
+            </tr>
+            
         </table>
 
     </div>

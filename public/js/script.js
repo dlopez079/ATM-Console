@@ -1,58 +1,27 @@
-/* 
-Fetch the users data located on a JSON file within the same folder as this javascript file.  Normally, JSON files are used for configurrations rather than data but we are going to use to use for data since we don't have much data to work with.  This fetch file will only work if your application is running on a local develoment server like "Live Server". 
-https://www.w3schools.com/js/js_api_fetch.asp
-*/
-fetch('./users.json')
-.then(function(resp) {
-  console.log(resp);
-})
-.then(function(data) {
-  // console.log(data);
-});
-
-// fetch('./accounts.json')
-// .then(function(resp) {
-//   return resp.json();
-// })
-// .then(function(data) {
-//   console.log(data.accounts);
-//   const accounts = data.accounts;
-// });
-
+/**
+ * USER NANAGMENT
+ * Array where users information will be saved. 
+ * When using arrays, the user information will only be saved temporarily.  You will have to use a database to store filed values for a longer period of time.
+ * Once your refresh the page, you will lose the information that was stored in the below array.
+ */
 const users = [];
-const userJSON = JSON.stringify(users, null, 3);
-// console.log(userJSON);
 
-// Create a function for register
+/**
+ * Function for the login button.
+ */
 function loginNavLink() {
 
-  // Change Dyamic Message to welcome
+  // Change Dyamic Message to welcome the user
   document.getElementById('dynamicMessage').innerHTML = "Enter Your Credentials!";
+
+  // Function to display the login form.
   displayLoginForm();
 
 }
 
-// Create a function for Login
-function registerNavLink() {
-  
-  // Change Dyamic Message to welcome
-  document.getElementById('dynamicMessage').innerHTML = "Please register your account!";
-  displayRegisterForm();
-
-}
-
-// Display Register Form 
-function displayRegisterForm() {
-  // Display register message.
-  let registerForm = document.getElementById('registerForm');
-  let loginForm = document.getElementById('loginForm');
-  
-  registerForm.style.display = "block";
-  loginForm.style.display = "none";
-
-}
-
-// Display Login Form
+/**
+ * Function to display the 'Log-in form'on the DOM for the user to enter their credentials
+ */
 function displayLoginForm() { 
 
   // Save form IDs to a variable.
@@ -64,7 +33,37 @@ function displayLoginForm() {
 
 }
 
-// Display Accounts Dashboard
+/**
+ * Function for the register button located in the main navigation of the page. 
+ */
+function registerNavLink() {
+  
+  // Change Dyamic Message to welcome
+  document.getElementById('dynamicMessage').innerHTML = "Please register your account!";
+
+  // Function to display the Register form
+  displayRegisterForm();
+
+}
+
+/**
+ * Function to display the register form so users can register their information into the array's table.
+ */
+function displayRegisterForm() {
+
+  // Display register message.
+  let registerForm = document.getElementById('registerForm');
+  let loginForm = document.getElementById('loginForm');
+  
+  registerForm.style.display = "block";
+  loginForm.style.display = "none";
+
+}
+
+/**
+ * Function to display the dashboard on the screen.
+ * You should only display the dashboard after the user is authenticated or logged in.
+ */
 function displayDashboard() {
 
   // Save form IDs to a variable.
@@ -75,21 +74,10 @@ function displayDashboard() {
   dashboard.style.display = "block";
 }
 
-// Submit Button for JSON
-function submit() {
-
-  // Save Value of input fields from form.
-  // let id =+ 1;
-  
-
-  // Check Credentials against JSON Arrays.
-  // loop through json object to see if the user exists.
-
-  // Display the Users json.
-  
-}
-
-// Create function to add users to JSON.
+/**
+ * Function to log in user using the information they entered in the Users Array.
+ * [ ] We need to add information for the users accounts.
+ */
 function loginUser() {
 
   // Capture the values from the form fields.
@@ -103,38 +91,51 @@ function loginUser() {
     if(username === users[i].username) {
 
       // Console.log to show that the username and pin match.  SHOULD DELETE LATER.
-      console.log(`USERNAME AND PIN MATCH: ${username} & ${users[i].username} and ${pin} & ${users[i].pin}`)
+      console.log(`CORRECT USERNAME: ${username} & ${users[i].username}`)
 
-      // Check to see if the pin matches.
-      if(pin === users[i].pin) {
-      
-      // Console.log to show that the pin is correct.  SHOULD DELETE LATER.
-      console.log(`CORRECT PIN: ${pin} & ${users[i].pin}`)
+        // Check to see if the pin matches.
+        if(pin === users[i].pin) {
+        
+        // Console.log to show that the pin is correct.  SHOULD DELETE LATER.
+        console.log(`CORRECT PIN: ${pin} & ${users[i].pin}`)
 
-      // Change Dyamic Message to welcome
-      document.getElementById('dynamicMessage').innerHTML = `Welcome ${users[i]['firstName']} ${users[i].lastName}`;
-      
-      // Console.log to show the account is fully verified.  SHOULD DELETE LATER.
-      console.log(`Account Verified for ${users[i]['firstName']} ${users[i].lastName}`)
+        // Change Dyamic Message to WELCOME USER!!
+        document.getElementById('dynamicMessage').innerHTML = `Welcome ${users[i].firstname} ${users[i].lastName}`;
+        
+        // Console.log to show the account is fully verified.  SHOULD DELETE LATER.
+        console.log(`Account Verified for ${users[i]['firstName']} ${users[i].lastName}`)
 
-      // Change Dyamic Message to welcome
-      document.getElementById('dynamicMessage').innerHTML = `Welcome ${users[i].firstName}!`;
-      
+        // Change Dyamic Message to welcome
+        document.getElementById('dynamicMessage').innerHTML = `Welcome ${users[i].firstName}!`;
 
-      // *****
-      // Remove Login div.  NEEDS TO BE WORKED ON.
-      displayDashboard()
+        // Dispaly Checking Amount
+        document.getElementById('checkingAmt').innerHTML = `$${users[i].checking}`;
 
-      // *****
-      // Display Users Accounts and balances with displayAccounts function  NEEDS TO BE WORKED ON. 
-      // INSERT A FUNCTION TO THAT WILL DISPLAY ACCOUNTS.!!!!!!
-      // *****
+        // Display Saving Amount
+        document.getElementById('savingAmt').innerHTML = `$${users[i].saving}`;
+
+        // Display Credit Amount
+        document.getElementById('creditAmt').innerHTML = `$${users[i].credit}`;
+
+        // Display Loan Amount
+        document.getElementById('loanAmt').innerHTML = `$${users[i].loan}`;
+
+
+        // *****
+        // Replace Log in button with Log out btn.NEEDS TO BE WORKED ON.
+        displayDashboard()
+
+        // *****
+        // Display Users Accounts and balances with displayAccounts function  NEEDS TO BE WORKED ON. 
+        // INSERT A FUNCTION TO THAT WILL DISPLAY ACCOUNTS.!!!!!!
+        // *****
       } else {
         // Verify that the pin is correct.
-      console.log(`INCORRECT PIN: ${pin} & ${users[i].pin}`)
+        console.log(`INCORRECT PIN: ${pin} & ${users[i].pin}`)
       }
 
     } else {
+      console.log(`INCORRECT USERNAME: ${username} & ${users[i].username}`)
       document.getElementById('dynamicMessage').innerHTML = `Incorrect Password!`;
     }
     
@@ -147,47 +148,64 @@ function loginUser() {
   
 }
 
-// Create function to add users to JSON.
+/**
+ * Funtion to register or save user information into the Users Array
+ */
 function registerUser() {
   
   // Capture the values from the form fields.
+  // Add if statement for number values so it's always float (number).
+  // Add javascript function to remote white space.
   let firstName = document.getElementById('getFirstName').value;
   let lastName = document.getElementById('getLastName').value;
   let username = document.getElementById('getUsername').value;
   let pin = document.getElementById('getPin').value;
+  let checking = document.getElementById('getChecking').value;
+  let saving = document.getElementById('getSaving').value;
+  let credit = document.getElementById('getCredit').value;
+  let loan = document.getElementById('getLoan').value;
   
   // Add user to Users Object
   let user = {
     "firstName": firstName,
     "lastName": lastName,
     "username": username,
-    "pin": pin
+    "pin": pin,
+    "checking": checking,
+    "saving" : saving,
+    "credit" : credit,
+    "loan" : loan
   }
 
   // Push User Information into array.
   users.push(user);
 
+  // Confirm that users are saved to temp array.
   console.table(users);
 
+  // Reset the values of the form fields.
   document.getElementById('getFirstName').value = '';
   document.getElementById('getLastName').value = '';
   document.getElementById('getUsername').value = '';
   document.getElementById('getPin').value = '';
+  document.getElementById('getChecking').value = '0.00';
+  document.getElementById('getSaving').value = '0.00';
+  document.getElementById('getCredit').value = '0.00';
+  document.getElementById('getLoan').value = '0.00';
 }
 
 
+/**
+ * ACCOUNT NANAGMENT
+ * When using arrays, the user information will only be saved temporarily.  You will have to use a database to store filed values for a longer period of time.
+ * Once your refresh the page, you will lose the information that was stored in the below array.
+ */
 
 
-
-
-
-
-
-
-
-
-
-function transfer() {
+/**
+ * Function to transfer funds from one account to another account.
+ */
+function depositDashNavLink() {
   // Retrieve all accounts for logged in user.
 
   // Select the "FROM" account.
@@ -202,10 +220,10 @@ function transfer() {
   // Retreive the balance of the "TO" account and add the amount you want to transfer.
 }
 
-
-
-
-function depositAmount() {
+/**
+ * Function to deposit ammount into one of the user's account.  Users should open account with at least 1 account active.
+ */
+function registerDashNavLink() {
   // Retrieve Balance
   // Loop through the table
   let currentBalance = accounts[0].balance;
@@ -224,7 +242,10 @@ function depositAmount() {
   document.getElementById("depositAmt").value = "";
 }
 
-function withdrawAmount() {
+/**
+ * Function to withdraw ammount into one of the user's account.  Users should open account with at least 1 account active.
+ */
+function transferDashNavLink() {
   // Retrieve Balance
   let currentBalance = accounts[0].balance;
 
