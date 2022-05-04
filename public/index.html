@@ -116,8 +116,6 @@
         <select name="depositFormAccount" id="depositFormAccount">
             <option value="checking">checking</option>
             <option value="saving">saving</option>
-            <option value="credit">credit</option>
-            <option value="loan">loan</option>
         </select>
         <br>
         <!-- Deposit Field -->
@@ -188,6 +186,30 @@
         <button onclick="withdrawAmount()" type="button">
             Withdraw Funds
         </button>
+    </div>
+
+    <!-- Account Withdrawal Form -->
+    <div id="paymentForm">
+
+        <!-- Select Liability Account -->
+        <label for="paymentTo"></label>
+        <select name="paymentTo" id="paymentTo">
+            <option value="creditPayment">Credit</option>
+            <option value="loanPayment">Loan</option>
+        </select>
+        <br>
+        <!-- Payment Field -->
+        <label for="paymentAmt">Amount</label>
+        <input type="text" id="paymentAmt" name="paymentAmt" value="0.00">
+
+        <!-- Desc Field -->
+        <label for="getRecentCcPayDesc">Description</label>
+        <input type="text" id="getRecentCCDesc" name="getRecentCcPayDesc" placeholder="Short Description">
+
+        <button onclick="credit()" type="button">
+            Submit Payment
+        </button>
+
     </div>
 
     <div id="dashboard">
