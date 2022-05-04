@@ -311,7 +311,7 @@ function registerUser() {
 
 
 /**
- * ACCOUNT NANAGMENT
+ * ACCOUNT NANAGMENT **********************************************************************************
  * When using arrays, the user information will only be saved temporarily.  You will have to use a database to store filed values for a longer period of time.
  * Once your refresh the page, you will lose the information that was stored in the below array.
  */
@@ -372,10 +372,11 @@ function withdrawDashNavLink() {
 function deposit() {
   
   // Retrieve all accounts for logged in user.
+  // Data from array must be in Number method.
   let checkingBalance = Number(users[0].checking);
-  let savingBalance = users[0].saving;
-  let creditBalance = users[0].credit;
-  let loanBalance = users[0].loan;
+  let savingBalance = Number(users[0].saving);  
+  let creditBalance = Number(users[0].credit);
+  let loanBalance = Number(users[0].loan);
 
   // Retrieve input values
   let account = document.getElementById('depositFormAccount').value;
