@@ -7,6 +7,23 @@
 const users = [];
 
 /**
+ * Toggle function for Login and Logout
+ */
+function displayLoginBtn() {
+
+  // Capture Login ID button
+  let loginBtn = document.getElementById('login');
+  let logoutBtn = document.getElementById('logout');
+  let registerBtn = document.getElementById('register');
+  
+  // Change style to none to remove li
+  loginBtn.style.display = "block";
+  registerBtn.style.display = "none";
+  logoutBtn.style.display = "none";
+  
+}
+
+/**
  * Function for the login button.
  */
 function loginNavLink() {
@@ -57,6 +74,20 @@ function displayRegisterForm() {
   
   registerForm.style.display = "block";
   loginForm.style.display = "none";
+
+}
+
+/**
+ * Function to display the register form so users can register their information into the array's table.
+ */
+ function removeRegisterForm() {
+
+  // Display register message.
+  let registerForm = document.getElementById('registerForm');
+  let loginForm = document.getElementById('loginForm');
+  
+  registerForm.style.display = "none";
+  loginForm.style.display = " ";
 
 }
 
@@ -195,15 +226,12 @@ function loginUser() {
         // Display Loan Amount
         document.getElementById('loanAmt').innerHTML = `$${users[i].loan}`;
 
-
-        // *****
-        // Replace Log in button with Log out btn.NEEDS TO BE WORKED ON.
+        // Display Dashboard
         displayDashboard()
 
-        // *****
-        // Display Users Accounts and balances with displayAccounts function  NEEDS TO BE WORKED ON. 
-        // INSERT A FUNCTION TO THAT WILL DISPLAY ACCOUNTS.!!!!!!
-        // *****
+        // Remove the Log in btn.
+        displayLoginBtn();
+
       } else {
         // Verify that the pin is correct.
         console.log(`INCORRECT PIN: ${pin} & ${users[i].pin}`)
@@ -267,6 +295,18 @@ function registerUser() {
   document.getElementById('getSaving').value = '0.00';
   document.getElementById('getCredit').value = '0.00';
   document.getElementById('getLoan').value = '0.00';
+
+  // Modify the dynamic message.
+  document.getElementById('dynamicMessage').innerHTML = "Please Log In!";
+  
+  // Remove register form
+  removeRegisterForm();
+
+  // Display Log in form
+  displayLoginForm();
+
+  // Display Log in Button
+  displayLoginBtn();
 }
 
 
@@ -285,10 +325,52 @@ function depositDashNavLink() {
   // Display transaction form
   displayDepositForm();
 
-  
+}
+
+/**
+ * Function to withdraw ammount into one of the user's account.  Users should open account with at least 1 account active.
+ */
+function withdrawDashNavLink() {
+  // Retrieve Balance
+  let currentBalance = accounts[0].balance;
+
+  let withdraw = parseInt(document.getElementById("withdrawAmt").value);
+
+  // 1000.00 + 100.00
+  let newBalance = currentBalance - withdraw;
+  console.log(newBalance)
+
+  // Change Balance
+  accounts[0].balance = newBalance;
+  console.table(accounts);
+
+  document.getElementById('balanceAmt').innerHTML = newBalance;
+  document.getElementById("withdrawAmt").value = "";
+}
+
+/**
+ * Function to transfer ammount into one of the user's account.  Users should open account with at least 1 account active.
+ */
+ function transferDashNavLink() {
+  // Retrieve Balance
+  let currentBalance = accounts[0].balance;
+
+  let withdraw = parseInt(document.getElementById("withdrawAmt").value);
+
+  // 1000.00 + 100.00
+  let newBalance = currentBalance - withdraw;
+  console.log(newBalance)
+
+  // Change Balance
+  accounts[0].balance = newBalance;
+  console.table(accounts);
+
+  document.getElementById('balanceAmt').innerHTML = newBalance;
+  document.getElementById("withdrawAmt").value = "";
 }
 
 function deposit() {
+  
   // Retrieve all accounts for logged in user.
   let checkingBalance = Number(users[0].checking);
   let savingBalance = users[0].saving;
@@ -331,24 +413,57 @@ function deposit() {
       break;
 
     case 'saving':
-      let newSavingBal = depositAmt + savingBalance;
+
+      // Perform the Math
+      let newSavingBal = savingBalance + depositAmt;
+
+      // Change the value of he checking account on table.
+      users[0].saving = newSavingBal;
 
       // Display Saving Amount
-      document.getElementById('savingAmt').innerHTML = `$${newSavingBal}`;
+      document.getElementById('savingAmt').innerHTML = users[0].saving;
+
+      // Display Recent Description
+      document.getElementById('recentSvDesc').innerHTML = getRecentDesc;
+      
+      // Remove Deposit Display from DOM
+      removeDepositForm();
       break;
 
     case 'credit':
-      let newCreditBal = depositAmt + creditBalance;
+      
+    // Perform the Math
+      let newCreditBal = creditBalance + depositAmt;
 
-      // Display Credit Amount
-      document.getElementById('creditAmt').innerHTML = `$${newCreditBal}`;
+      // Change the value of he checking account on table.
+      users[0].credit = newCreditBal;
+
+      // Display Saving Amount
+      document.getElementById('creditAmt').innerHTML = users[0].credit;
+
+      // Display Recent Description
+      document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
+      
+      // Remove Deposit Display from DOM
+      removeDepositForm();
       break;
 
     case 'loan':
-      let newLoanBal = depositAmt + loanBalance;
+      
+      // Perform the Math
+      let newLoanBal = loanBalance + depositAmt;
 
-      // Display Loan Amount
-      document.getElementById('loanAmt').innerHTML = `$${newLoanBal}`;
+      // Change the value of he checking account on table.
+      users[0].credit = newLoanBal;
+
+      // Display Saving Amount
+      document.getElementById('loanAmt').innerHTML = users[0].loan;
+
+      // Display Recent Description
+      document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
+      
+      // Remove Deposit Display from DOM
+      removeDepositForm();
       break;
   
     default:
@@ -359,44 +474,109 @@ function deposit() {
   document.getElementById('dynamicMessage').innerHTML = `Successful Deposit!`;
   
 }
-/**
- * Function to withdraw ammount into one of the user's account.  Users should open account with at least 1 account active.
- */
-function withdrawDashNavLink() {
-  // Retrieve Balance
-  let currentBalance = accounts[0].balance;
 
-  let withdraw = parseInt(document.getElementById("withdrawAmt").value);
+function withdraw() {
+  
+  // Retrieve all accounts for logged in user.
+  let checkingBalance = Number(users[0].checking);
+  let savingBalance = users[0].saving;
+  let creditBalance = users[0].credit;
+  let loanBalance = users[0].loan;
 
-  // 1000.00 + 100.00
-  let newBalance = currentBalance - withdraw;
-  console.log(newBalance)
+  // Retrieve input values
+  let account = document.getElementById('depositFormAccount').value;
+  let withdrawAmt = Number(document.getElementById('depositAmt').value);
+  let getRecentDesc = document.getElementById('getRecentDesc').value;
+  
+  // Console Verification
+  let total = checkingBalance - withdrawAmt;
+  console.table({
+    "Balance": checkingBalance, 
+    "Deposit": withdrawAmt, 
+    "Desc": getRecentDesc,
+    "Total": total
+  });
 
-  // Change Balance
-  accounts[0].balance = newBalance;
-  console.table(accounts);
 
-  document.getElementById('balanceAmt').innerHTML = newBalance;
-  document.getElementById("withdrawAmt").value = "";
-}
+  // Created a switch to taking in account and perform the operations accordingly.
+  switch (account) {
+    case 'checking':
 
-/**
- * Function to transfer ammount into one of the user's account.  Users should open account with at least 1 account active.
- */
- function transferDashNavLink() {
-  // Retrieve Balance
-  let currentBalance = accounts[0].balance;
+      // Perform the Math
+      let newCheckingBal = checkingBalance + depositAmt;
 
-  let withdraw = parseInt(document.getElementById("withdrawAmt").value);
+      // Change the value of he checking account on table.
+      users[0].checking = newCheckingBal;
 
-  // 1000.00 + 100.00
-  let newBalance = currentBalance - withdraw;
-  console.log(newBalance)
+      // Display Checking Amount
+      document.getElementById('checkingAmt').innerHTML = users[0].checking;
+      
+      // Display Recent Description
+      document.getElementById('recentChDesc').innerHTML = getRecentDesc;
+      
+      // Remove Deposit Display from DOM
+      removeDepositForm();
+      break;
 
-  // Change Balance
-  accounts[0].balance = newBalance;
-  console.table(accounts);
+    case 'saving':
 
-  document.getElementById('balanceAmt').innerHTML = newBalance;
-  document.getElementById("withdrawAmt").value = "";
+      // Perform the Math
+      let newSavingBal = savingBalance + depositAmt;
+
+      // Change the value of he checking account on table.
+      users[0].saving = newSavingBal;
+
+      // Display Saving Amount
+      document.getElementById('savingAmt').innerHTML = users[0].saving;
+
+      // Display Recent Description
+      document.getElementById('recentSvDesc').innerHTML = getRecentDesc;
+      
+      // Remove Deposit Display from DOM
+      removeDepositForm();
+      break;
+
+    case 'credit':
+      
+    // Perform the Math
+      let newCreditBal = creditBalance + depositAmt;
+
+      // Change the value of he checking account on table.
+      users[0].credit = newCreditBal;
+
+      // Display Saving Amount
+      document.getElementById('creditAmt').innerHTML = users[0].credit;
+
+      // Display Recent Description
+      document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
+      
+      // Remove Deposit Display from DOM
+      removeDepositForm();
+      break;
+
+    case 'loan':
+      
+      // Perform the Math
+      let newLoanBal = loanBalance + depositAmt;
+
+      // Change the value of he Loan account on table.
+      users[0].loan = newLoanBal;
+
+      // Display Saving Amount
+      document.getElementById('loanAmt').innerHTML = users[0].loan;
+
+      // Display Recent Description
+      document.getElementById('recentLoanDesc').innerHTML = getRecentDesc;
+      
+      // Remove Deposit Display from DOM
+      removeDepositForm();
+      break;
+  
+    default:
+      break;
+  }
+  
+  // Change Dyamic Message to welcome
+  document.getElementById('dynamicMessage').innerHTML = `Successful Deposit!`;
+  
 }
