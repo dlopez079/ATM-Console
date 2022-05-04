@@ -15,12 +15,12 @@ function displayLoginBtn() {
   let loginBtn = document.getElementById('login');
   let logoutBtn = document.getElementById('logout');
   let registerBtn = document.getElementById('register');
-  
+
   // Change style to none to remove li
   loginBtn.style.display = "block";
   registerBtn.style.display = "none";
   logoutBtn.style.display = "none";
-  
+
 }
 
 /**
@@ -39,12 +39,12 @@ function loginNavLink() {
 /**
  * Function to display the 'Log-in form'on the DOM for the user to enter their credentials
  */
-function displayLoginForm() { 
+function displayLoginForm() {
 
   // Save form IDs to a variable.
   let registerForm = document.getElementById('registerForm');
   let loginForm = document.getElementById('loginForm');
-  
+
   registerForm.style.display = "none";
   loginForm.style.display = "block";
 
@@ -54,7 +54,7 @@ function displayLoginForm() {
  * Function for the register button located in the main navigation of the page. 
  */
 function registerNavLink() {
-  
+
   // Change Dyamic Message to welcome
   document.getElementById('dynamicMessage').innerHTML = "Please register your account!";
 
@@ -71,7 +71,7 @@ function displayRegisterForm() {
   // Display register message.
   let registerForm = document.getElementById('registerForm');
   let loginForm = document.getElementById('loginForm');
-  
+
   registerForm.style.display = "block";
   loginForm.style.display = "none";
 
@@ -80,12 +80,12 @@ function displayRegisterForm() {
 /**
  * Function to display the register form so users can register their information into the array's table.
  */
- function removeRegisterForm() {
+function removeRegisterForm() {
 
   // Display register message.
   let registerForm = document.getElementById('registerForm');
   let loginForm = document.getElementById('loginForm');
-  
+
   registerForm.style.display = "none";
   loginForm.style.display = " ";
 
@@ -100,7 +100,7 @@ function displayDashboard() {
   // Save form IDs to a variable.
   let dashboard = document.getElementById('dashboard');
   let loginForm = document.getElementById('loginForm');
-  
+
   loginForm.style.display = "none";
   dashboard.style.display = "block";
 }
@@ -108,11 +108,11 @@ function displayDashboard() {
 /**
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
- function displayDepositForm() {
+function displayDepositForm() {
 
   // Capture form ID from DOM.
   let depositForm = document.getElementById('depositForm');
-  
+
   // depositForm div is currently set to none which hides the element.
   // Change the display style to block so element is viewable.
   depositForm.style.display = "block";
@@ -125,7 +125,7 @@ function removeDepositForm() {
 
   // Capture form ID from DOM.
   let depositForm = document.getElementById('depositForm');
-  
+
   // depositForm div is currently set to block which displays the element.
   // change the display style to none so element is NOT viewable.
   depositForm.style.display = "none";
@@ -134,11 +134,11 @@ function removeDepositForm() {
 /**
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
- function displayWithdrawalForm() {
+function displayWithdrawalForm() {
 
   // Capture form ID from DOM
   let withdrawalForm = document.getElementById('withdrawalForm');
-  
+
   // withdrawalForm div is currently set to none which hides the element.
   // Change the display style to block so element is viewable.
   withdrawalForm.style.display = "block";
@@ -147,25 +147,25 @@ function removeDepositForm() {
 /**
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
- function removeWithdrawalForm() {
+function removeWithdrawalForm() {
 
   // Capture form ID from DOM.
   let withdrawalForm = document.getElementById('withdrawForm');
-  
+
   // withdrawalForm div is currently set to block which displays the element.
   // change the display style to none so element is NOT viewable.
   withdrawalForm.style.display = "none";
-  
+
 }
 
 /**
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
- function displayTransferForm() {
+function displayTransferForm() {
 
   // Display register message
   let withdrawalForm = document.getElementById('withdrawalForm');
-  
+
   withdrawalForm.style.display = "block";
   dashboard.style.display = "none";
 
@@ -174,9 +174,9 @@ function removeDepositForm() {
 /**
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
- function removeTransferForm() {
+function removeTransferForm() {
   let withdrawForm = document.getElementById('withdrawForm');
-  
+
   withdrawForm.style.display = "none";
 }
 
@@ -189,25 +189,25 @@ function loginUser() {
   // Capture the values from the form fields.
   let username = document.getElementById('username').value;
   let pin = document.getElementById('pin').value;
-  
+
   // Loop through the Users Array to gain access to the object information.
-  for(let i=0; i < users.length; i++) {
+  for (let i = 0; i < users.length; i++) {
 
     // Check to see if the username that was entered matches the username in the object.
-    if(username === users[i].username) {
+    if (username === users[i].username) {
 
       // Console.log to show that the username and pin match.  SHOULD DELETE LATER.
       console.log(`CORRECT USERNAME: ${username} & ${users[i].username}`)
 
-        // Check to see if the pin matches.
-        if(pin === users[i].pin) {
-        
+      // Check to see if the pin matches.
+      if (pin === users[i].pin) {
+
         // Console.log to show that the pin is correct.  SHOULD DELETE LATER.
         console.log(`CORRECT PIN: ${pin} & ${users[i].pin}`)
 
         // Change Dyamic Message to WELCOME USER!!
         document.getElementById('dynamicMessage').innerHTML = `Welcome ${users[i].firstname} ${users[i].lastName}`;
-        
+
         // Console.log to show the account is fully verified.  SHOULD DELETE LATER.
         console.log(`Account Verified for ${users[i]['firstName']} ${users[i].lastName}`)
 
@@ -241,21 +241,21 @@ function loginUser() {
       console.log(`INCORRECT USERNAME: ${username} & ${users[i].username}`)
       document.getElementById('dynamicMessage').innerHTML = `Incorrect Password!`;
     }
-    
+
   }
 
   // Capture the values from the form fields.
   document.getElementById('username').value = '';
-  document.getElementById('pin').value='';
+  document.getElementById('pin').value = '';
 
-  
+
 }
 
 /**
  * Funtion to register or save user information into the Users Array
  */
 function registerUser() {
-  
+
   // Capture the values from the form fields.
   // Add if statement for number values so it's always float (number).
   // Add javascript function to remote white space.
@@ -267,7 +267,7 @@ function registerUser() {
   let saving = document.getElementById('getSaving').value;
   let credit = document.getElementById('getCredit').value;
   let loan = document.getElementById('getLoan').value;
-  
+
   // Add user to Users Object
   let user = {
     "firstName": firstName,
@@ -275,9 +275,9 @@ function registerUser() {
     "username": username,
     "pin": pin,
     "checking": checking,
-    "saving" : saving,
-    "credit" : credit,
-    "loan" : loan
+    "saving": saving,
+    "credit": credit,
+    "loan": loan
   }
 
   // Push User Information into array.
@@ -298,7 +298,7 @@ function registerUser() {
 
   // Modify the dynamic message.
   document.getElementById('dynamicMessage').innerHTML = "Please Log In!";
-  
+
   // Remove register form
   removeRegisterForm();
 
@@ -351,7 +351,7 @@ function withdrawDashNavLink() {
 /**
  * Function to transfer ammount into one of the user's account.  Users should open account with at least 1 account active.
  */
- function transferDashNavLink() {
+function transferDashNavLink() {
   // Retrieve Balance
   let currentBalance = accounts[0].balance;
 
@@ -369,12 +369,12 @@ function withdrawDashNavLink() {
   document.getElementById("withdrawAmt").value = "";
 }
 
-function deposit() {
-  
+function debit() {
+
   // Retrieve all accounts for logged in user.
   // Data from array must be in Number method.
   let checkingBalance = Number(users[0].checking);
-  let savingBalance = Number(users[0].saving);  
+  let savingBalance = Number(users[0].saving);
   let creditBalance = Number(users[0].credit);
   let loanBalance = Number(users[0].loan);
 
@@ -382,19 +382,11 @@ function deposit() {
   let account = document.getElementById('depositFormAccount').value;
   let depositAmt = Number(document.getElementById('depositAmt').value);
   let getRecentDesc = document.getElementById('getRecentDesc').value;
-  
-  // Console Verification
-  let total = checkingBalance + depositAmt;
-  console.table({
-    "Balance": checkingBalance, 
-    "Deposit": depositAmt, 
-    "Desc": getRecentDesc,
-    "Total": total
-  });
-
 
   // Created a switch to taking in account and perform the operations accordingly.
   switch (account) {
+
+    // Checking Switch.  If the account variable has a string value of checking, then perform the code under case until break point.
     case 'checking':
 
       // Perform the Math
@@ -404,13 +396,22 @@ function deposit() {
       users[0].checking = newCheckingBal;
 
       // Display Checking Amount
-      document.getElementById('checkingAmt').innerHTML = users[0].checking;
-      
+      document.getElementById('checkingAmt').innerHTML = `$ ${users[0].checking.toFixed(2)}`;
+
       // Display Recent Description
-      document.getElementById('recentChDesc').innerHTML = getRecentDesc;
-      
+      document.getElementById('recentCkDesc').innerHTML = getRecentDesc;
+
       // Remove Deposit Display from DOM
       removeDepositForm();
+
+      // Test Checking Switch with console.table *******
+      let checkingTotal = checkingBalance + depositAmt;
+      console.table({
+        "Balance": checkingBalance,
+        "Deposit": depositAmt,
+        "Desc": getRecentDesc,
+        "Total": checkingTotal
+      });
       break;
 
     case 'saving':
@@ -422,62 +423,89 @@ function deposit() {
       users[0].saving = newSavingBal;
 
       // Display Saving Amount
-      document.getElementById('savingAmt').innerHTML = users[0].saving;
+      document.getElementById('savingAmt').innerHTML = `$ ${users[0].saving.toFixed(2)}`;
 
       // Display Recent Description
       document.getElementById('recentSvDesc').innerHTML = getRecentDesc;
-      
+
       // Remove Deposit Display from DOM
       removeDepositForm();
+
+      // Test Checking Switch with console.table *******
+      let savingTotal = savingBalance + depositAmt;
+      console.table({
+        "Balance": savingBalance,
+        "Deposit": depositAmt,
+        "Desc": getRecentDesc,
+        "Total": savingTotal
+      });
       break;
 
     case 'credit':
-      
-    // Perform the Math
+
+      // Perform the Math
       let newCreditBal = creditBalance + depositAmt;
 
       // Change the value of he checking account on table.
       users[0].credit = newCreditBal;
 
       // Display Saving Amount
-      document.getElementById('creditAmt').innerHTML = users[0].credit;
+      document.getElementById('creditAmt').innerHTML = `$ ${users[0].credit.toFixed(2)}`;
 
       // Display Recent Description
       document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
-      
+
       // Remove Deposit Display from DOM
       removeDepositForm();
-      break;
 
-    case 'loan':
+      // Test Checking Switch with console.table *******
+      let creditTotal = creditBalance + depositAmt;
+      console.table({
+        "Balance": creditBalance,
+        "Deposit": depositAmt,
+        "Desc": getRecentDesc,
+        "Total": creditTotal
+      });
+      break;
       
+    case 'loan':
+
       // Perform the Math
       let newLoanBal = loanBalance + depositAmt;
 
       // Change the value of he checking account on table.
-      users[0].credit = newLoanBal;
+      users[0].loan = newLoanBal;
 
       // Display Saving Amount
-      document.getElementById('loanAmt').innerHTML = users[0].loan;
+      document.getElementById('loanAmt').innerHTML = `$ ${users[0].loan.toFixed(2)}`;
 
       // Display Recent Description
-      document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
-      
+      document.getElementById('recentLoanDesc').innerHTML = getRecentDesc;
+
       // Remove Deposit Display from DOM
       removeDepositForm();
+      
+      // Test Checking Switch with console.table *******
+      let loanTotal = loanBalance + depositAmt;
+      console.table({
+        "Balance": loanBalance,
+        "Deposit": depositAmt,
+        "Desc": getRecentDesc,
+        "Total": loanTotal
+      });
       break;
-  
+
     default:
       break;
   }
-  
+
   // Change Dyamic Message to welcome
   document.getElementById('dynamicMessage').innerHTML = `Successful Deposit!`;
-  
+
 }
 
-function withdraw() {
-  
+function credit() {
+
   // Retrieve all accounts for logged in user.
   let checkingBalance = Number(users[0].checking);
   let savingBalance = users[0].saving;
@@ -488,12 +516,12 @@ function withdraw() {
   let account = document.getElementById('depositFormAccount').value;
   let withdrawAmt = Number(document.getElementById('depositAmt').value);
   let getRecentDesc = document.getElementById('getRecentDesc').value;
-  
+
   // Console Verification
   let total = checkingBalance - withdrawAmt;
   console.table({
-    "Balance": checkingBalance, 
-    "Deposit": withdrawAmt, 
+    "Balance": checkingBalance,
+    "Deposit": withdrawAmt,
     "Desc": getRecentDesc,
     "Total": total
   });
@@ -511,10 +539,10 @@ function withdraw() {
 
       // Display Checking Amount
       document.getElementById('checkingAmt').innerHTML = users[0].checking;
-      
+
       // Display Recent Description
       document.getElementById('recentChDesc').innerHTML = getRecentDesc;
-      
+
       // Remove Deposit Display from DOM
       removeDepositForm();
       break;
@@ -532,14 +560,14 @@ function withdraw() {
 
       // Display Recent Description
       document.getElementById('recentSvDesc').innerHTML = getRecentDesc;
-      
+
       // Remove Deposit Display from DOM
       removeDepositForm();
       break;
 
     case 'credit':
-      
-    // Perform the Math
+
+      // Perform the Math
       let newCreditBal = creditBalance + depositAmt;
 
       // Change the value of he checking account on table.
@@ -550,13 +578,13 @@ function withdraw() {
 
       // Display Recent Description
       document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
-      
+
       // Remove Deposit Display from DOM
       removeDepositForm();
       break;
 
     case 'loan':
-      
+
       // Perform the Math
       let newLoanBal = loanBalance + depositAmt;
 
@@ -568,16 +596,23 @@ function withdraw() {
 
       // Display Recent Description
       document.getElementById('recentLoanDesc').innerHTML = getRecentDesc;
-      
+
       // Remove Deposit Display from DOM
       removeDepositForm();
       break;
-  
+
     default:
       break;
   }
-  
+
   // Change Dyamic Message to welcome
   document.getElementById('dynamicMessage').innerHTML = `Successful Deposit!`;
-  
+
 }
+
+/**
+ * Tranfers will be a combination of
+ * debit()
+ * credit()
+ * 
+ */

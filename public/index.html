@@ -128,7 +128,7 @@
         <label for="getRecentDesc">Description</label>
         <input type="text" id="getRecentDesc" name="getRecentDesc" placeholder="Short Description">
 
-        <button onclick="deposit()" type="button">
+        <button onclick="debit()" type="button">
             Deposit Funds
         </button>
 
@@ -154,7 +154,7 @@
         <label for="getRecentCCDesc">Description</label>
         <input type="text" id="getRecentCCDesc" name="getRecentCCDesc" placeholder="Short Description">
 
-        <button onclick="withdrawAmount()" type="button">
+        <button onclick="credit()" type="button">
             Withdraw Funds
         </button>
 
@@ -202,6 +202,9 @@
 
                 <!-- Transfer  -->
                 <li><a id="transferDashNavLink" onclick="transferDashNavLink()">Transfer</a></li>
+
+                <!-- Payment  -->
+                <li><a id="paymentDashNavLink" onclick="paymentDashNavLink()">Transfer</a></li>
 
             </ul>
 
