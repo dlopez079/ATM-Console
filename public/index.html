@@ -91,7 +91,7 @@
     <!-- Login Form -->
 
     <div id="loginForm">
-        <h3>Login</h3>
+        <h3 ></h3>
 
         <fieldset>
             <!-- Username Field -->
@@ -133,7 +133,7 @@
     </div>
 
     <!-- Account Withdrawal Form -->
-    <div id="withdrawalForm">
+    <div id="withdrawForm">
 
         <!-- Select Account -->
         <label for="withdrawForm"></label>
@@ -162,7 +162,7 @@
     <div id="transferForm">
 
         <!-- Select Account to transfer to -->
-        <label for="transferTo"></label>
+        <label for="transferTo">Transfer To Account: </label>
         <select name="transferTo" id="transferTo">
             <option value="checkingTransferTo">checking</option>
             <option value="savingTransferTo">saving</option>
@@ -170,8 +170,10 @@
             <option value="loanTransferTo">loan</option>
         </select>
 
+        <br>
+        
         <!-- Select Account to transfer from-->
-        <label for="transferFrom"></label>
+        <label for="transferFrom">Transfer From Account: </label>
         <select name="transferFrom" id="transferFrom">
             <option value="checkingTransferFrom">checking</option>
             <option value="savingTransferFrom">saving</option>
@@ -183,8 +185,8 @@
         <label for="transferAmt">Amount</label>
         <input type="text" id="transferAmt" name="transferAmt" value="0.00">
 
-        <button onclick="withdrawAmount()" type="button">
-            Withdraw Funds
+        <button onclick="transfer()" type="button">
+            Transfer Funds
         </button>
     </div>
 
@@ -192,21 +194,21 @@
     <div id="paymentForm">
 
         <!-- Select Liability Account -->
-        <label for="paymentTo"></label>
-        <select name="paymentTo" id="paymentTo">
+        <label for="getPaymentTo"></label>
+        <select name="getPaymentTo" id="getPaymentTo">
             <option value="creditPayment">Credit</option>
             <option value="loanPayment">Loan</option>
         </select>
         <br>
         <!-- Payment Field -->
-        <label for="paymentAmt">Amount</label>
-        <input type="text" id="paymentAmt" name="paymentAmt" value="0.00">
+        <label for="getPaymentAmt">Amount</label>
+        <input type="text" id="getPaymentAmt" name="getPaymentAmt" value="0.00">
 
         <!-- Desc Field -->
-        <label for="getRecentCcPayDesc">Description</label>
-        <input type="text" id="getRecentCCDesc" name="getRecentCcPayDesc" placeholder="Short Description">
+        <label for="getRecentPayDesc">Description</label>
+        <input type="text" id="getRecentPayDesc" name="getRecentPayDesc" placeholder="Short Description">
 
-        <button onclick="credit()" type="button">
+        <button onclick="payment()" type="button">
             Submit Payment
         </button>
 
@@ -220,13 +222,13 @@
                 <li><a id="depositDashNavLink" type="button" onclick="depositDashNavLink()">Deposit</a></li>
 
                 <!-- Withdrawal  -->
-                <li><a id="withdrawDashNavLink" onclick="withdrawDashNavLink()">Withdrawal</a></li>
+                <li><a id="withdrawDashNavLink" type="button" onclick="withdrawDashNavLink()">Withdrawal</a></li>
 
                 <!-- Transfer  -->
-                <li><a id="transferDashNavLink" onclick="transferDashNavLink()">Transfer</a></li>
+                <li><a id="transferDashNavLink" type="button" onclick="transferDashNavLink()">Transfer</a></li>
 
                 <!-- Payment  -->
-                <li><a id="paymentDashNavLink" onclick="paymentDashNavLink()">Transfer</a></li>
+                <li><a id="paymentDashNavLink" type="button" onclick="paymentDashNavLink()">Payments</a></li>
 
             </ul>
 

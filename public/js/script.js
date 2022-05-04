@@ -50,6 +50,18 @@ function displayLoginForm() {
 
 }
 
+function removeLoginBtn() {
+  
+  // Save form IDs to a variable
+  let registerbtn = document.getElementById('register');
+  let loginBtn = document.getElementById('login');
+  let logoutBtn = document.getElementById('logout');
+
+  registerbtn.style.display = "none";
+  loginBtn.style.display = "none";
+  logoutBtn.style.display = "block";
+}
+
 /** REGISTER BUTTON
  * Function for the register button located in the main navigation of the page. 
  */
@@ -116,6 +128,10 @@ function displayDepositForm() {
   // depositForm div is currently set to none which hides the element.
   // Change the display style to block so element is viewable.
   depositForm.style.display = "block";
+
+  removePaymentForm();
+  removeTransferForm();
+  removeWithdrawalForm();
 }
 
 /**
@@ -137,11 +153,15 @@ function removeDepositForm() {
 function displayWithdrawalForm() {
 
   // Capture form ID from DOM
-  let withdrawalForm = document.getElementById('withdrawalForm');
+  let withdrawalForm = document.getElementById('withdrawForm');
 
   // withdrawalForm div is currently set to none which hides the element.
   // Change the display style to block so element is viewable.
   withdrawalForm.style.display = "block";
+
+  removeDepositForm();
+  removePaymentForm();
+  removeTransferForm();
 }
 
 /**
@@ -167,8 +187,10 @@ function displayTransferForm() {
   let transferForm = document.getElementById('transferForm');
 
   transferForm.style.display = "block";
-  dashboard.style.display = "none";
 
+  removeDepositForm();
+  removeWithdrawalForm();
+  removePaymentForm();
 }
 
 /** REMOVE TRANSFER FORM
@@ -183,14 +205,16 @@ function removeTransferForm() {
 /** DISPLAY PAYMENT FORM
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
- function displayPaymentForm() {
+function displayPaymentForm() {
 
   // Display register message
   let paymentForm = document.getElementById('paymentForm');
 
   paymentForm.style.display = "block";
-  dashboard.style.display = "none";
 
+  removeDepositForm();
+  removeTransferForm();
+  removeWithdrawalForm();
 }
 
 /** REMOVE PAYMENT FORM
@@ -251,8 +275,8 @@ function loginUser() {
         // Display Dashboard
         displayDashboard()
 
-        // Remove the Log in btn.
-        displayLoginBtn();
+        // Remove the Log in and register btn.
+        removeLoginBtn();
 
       } else {
         // Verify that the pin is correct.
@@ -331,7 +355,6 @@ function registerUser() {
   displayLoginBtn();
 }
 
-
 /**
  * ACCOUNT NANAGMENT **********************************************************************************
  * When using arrays, the user information will only be saved temporarily.  You will have to use a database to store filed values for a longer period of time.
@@ -353,44 +376,28 @@ function depositDashNavLink() {
  * Function to withdraw ammount into one of the user's account.  Users should open account with at least 1 account active.
  */
 function withdrawDashNavLink() {
-  // Retrieve Balance
-  let currentBalance = accounts[0].balance;
-
-  let withdraw = parseInt(document.getElementById("withdrawAmt").value);
-
-  // 1000.00 + 100.00
-  let newBalance = currentBalance - withdraw;
-  console.log(newBalance)
-
-  // Change Balance
-  accounts[0].balance = newBalance;
-  console.table(accounts);
-
-  document.getElementById('balanceAmt').innerHTML = newBalance;
-  document.getElementById("withdrawAmt").value = "";
+  // Display transaction form
+  displayWithdrawalForm();
 }
 
 /**
- * Function to transfer ammount into one of the user's account.  Users should open account with at least 1 account active.
+ * Function to transfer amount into one of the user's account.  Users should open account with at least 1 account active.
  */
 function transferDashNavLink() {
-  // Retrieve Balance
-  let currentBalance = accounts[0].balance;
-
-  let withdraw = parseInt(document.getElementById("withdrawAmt").value);
-
-  // 1000.00 + 100.00
-  let newBalance = currentBalance - withdraw;
-  console.log(newBalance)
-
-  // Change Balance
-  accounts[0].balance = newBalance;
-  console.table(accounts);
-
-  document.getElementById('balanceAmt').innerHTML = newBalance;
-  document.getElementById("withdrawAmt").value = "";
+  displayTransferForm();
 }
 
+/**
+ * Function to payment amount into one of the user's account.  Users should open account with at least 1 account active.
+ */
+function paymentDashNavLink() {
+  displayPaymentForm();
+}
+
+
+/** MATH FUNCTIONS
+ * Function that perform Math.
+ */
 function debit() {
 
   // Retrieve all accounts for logged in user.
@@ -489,7 +496,7 @@ function debit() {
         "Total": creditTotal
       });
       break;
-      
+
     case 'loan':
 
       // Perform the Math
@@ -506,7 +513,7 @@ function debit() {
 
       // Remove Deposit Display from DOM
       removeDepositForm();
-      
+
       // Test Checking Switch with console.table *******
       let loanTotal = loanBalance + depositAmt;
       console.table({
@@ -640,7 +647,7 @@ function credit() {
  * [ ] Create a displayTransferForm Function
  * [ ] Create a transfer function for the math.
  */
-function transfer(){
+function transfer() {
 
 }
 /**
