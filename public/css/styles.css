@@ -4,7 +4,8 @@
 #dashboard,
 #depositForm,
 #withdrawalForm,
-#transferForm {
+#transferForm,
+#logout {
   display: none;
 }
 
@@ -65,6 +66,16 @@ li a:hover {
 
 input {
   display: block;
+}
+
+fieldset {
+  display: inline;
+  background-color: red;
+  color: white;
+}
+
+.accounts {
+  display: inline;
 }
 
 button {
