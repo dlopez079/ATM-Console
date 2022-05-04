@@ -5,7 +5,9 @@
 #depositForm,
 #withdrawalForm,
 #transferForm,
-#logout {
+#logout,
+#paymentForm,
+#transferForm {
   display: none;
 }
 
