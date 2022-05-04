@@ -6,7 +6,7 @@
  */
 const users = [];
 
-/**
+/** DISPLAY LOGIN BTN
  * Toggle function for Login and Logout
  */
 function displayLoginBtn() {
@@ -23,7 +23,7 @@ function displayLoginBtn() {
 
 }
 
-/**
+/** LOGIN BUTTON
  * Function for the login button.
  */
 function loginNavLink() {
@@ -36,7 +36,7 @@ function loginNavLink() {
 
 }
 
-/**
+/** DISPLAY LOGIN
  * Function to display the 'Log-in form'on the DOM for the user to enter their credentials
  */
 function displayLoginForm() {
@@ -50,7 +50,7 @@ function displayLoginForm() {
 
 }
 
-/**
+/** REGISTER BUTTON
  * Function for the register button located in the main navigation of the page. 
  */
 function registerNavLink() {
@@ -63,7 +63,7 @@ function registerNavLink() {
 
 }
 
-/**
+/** DISPLAY REGISTER
  * Function to display the register form so users can register their information into the array's table.
  */
 function displayRegisterForm() {
@@ -77,7 +77,7 @@ function displayRegisterForm() {
 
 }
 
-/**
+/** REMOVE REGISTER
  * Function to display the register form so users can register their information into the array's table.
  */
 function removeRegisterForm() {
@@ -91,7 +91,7 @@ function removeRegisterForm() {
 
 }
 
-/**
+/** DISPLAY DASHBOARD
  * Function to display the dashboard on the screen.
  * You should only display the dashboard after the user is authenticated or logged in.
  */
@@ -105,7 +105,7 @@ function displayDashboard() {
   dashboard.style.display = "block";
 }
 
-/**
+/** DISPLAY DEPOSIT FORM
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
 function displayDepositForm() {
@@ -158,29 +158,51 @@ function removeWithdrawalForm() {
 
 }
 
-/**
+/** DISPLAY TRANSFER FORM
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
 function displayTransferForm() {
 
   // Display register message
-  let withdrawalForm = document.getElementById('withdrawalForm');
+  let transferForm = document.getElementById('transferForm');
 
-  withdrawalForm.style.display = "block";
+  transferForm.style.display = "block";
   dashboard.style.display = "none";
 
 }
 
-/**
+/** REMOVE TRANSFER FORM
  * Function to display the withdrawal form so users can withdraw from their accounts.
  */
 function removeTransferForm() {
-  let withdrawForm = document.getElementById('withdrawForm');
+  let transferForm = document.getElementById('transferForm');
 
-  withdrawForm.style.display = "none";
+  transferForm.style.display = "none";
 }
 
-/**
+/** DISPLAY PAYMENT FORM
+ * Function to display the withdrawal form so users can withdraw from their accounts.
+ */
+ function displayPaymentForm() {
+
+  // Display register message
+  let paymentForm = document.getElementById('paymentForm');
+
+  paymentForm.style.display = "block";
+  dashboard.style.display = "none";
+
+}
+
+/** REMOVE PAYMENT FORM
+ * Function to display the withdrawal form so users can withdraw from their accounts.
+ */
+function removePaymentForm() {
+  let paymentForm = document.getElementById('paymentForm');
+
+  paymentForm.style.display = "none";
+}
+
+/** DISPLAY LOGIN USER FORM
  * Function to log in user using the information they entered in the Users Array.
  * [ ] We need to add information for the users accounts.
  */
@@ -251,7 +273,7 @@ function loginUser() {
 
 }
 
-/**
+/** DISPLAY REGISTER USER
  * Funtion to register or save user information into the Users Array
  */
 function registerUser() {
@@ -614,5 +636,20 @@ function credit() {
  * Tranfers will be a combination of
  * debit()
  * credit()
- * 
+ * [x] Create btn for Transfers
+ * [ ] Create a displayTransferForm Function
+ * [ ] Create a transfer function for the math.
  */
+function transfer(){
+
+}
+/**
+ * Create payment form for Credit Card and Loan
+ * Use debit() and Credit() to manipulate the DOM.
+ * [ ] Create btn for Payments
+ * [ ] Create a displayPaymentForm function
+ * [ ] Create a payment function
+ */
+function payment() {
+
+}
