@@ -21,6 +21,7 @@
         </div>
     </div>
 
+    <!-- Navigation Bar -->
     <nav>
         <ul>
             <!-- Login and Register account div -->
@@ -41,7 +42,7 @@
 
     <!-- Dynamic Message -->
     <div id="dynamicMessage"></div>
-
+    <br>
     <!-- Register Form -->
     <div id="registerForm">
         <h3>Register</h3>
@@ -120,11 +121,7 @@
         <br>
         <!-- Deposit Field -->
         <label for="depositAmt">Amount</label>
-        <input type="number" id="depositAmt" name="depositAmt" value="0.00" min="0.00" max="5000.00">
-
-        <!-- Desc Field -->
-        <label for="getRecentDesc">Description</label>
-        <input type="text" id="getRecentDesc" name="getRecentDesc" placeholder="Short Description">
+        <input type="number" id="depositAmt" name="depositAmt" value="0.00">
 
         <button onclick="debit(); showClicks(); calculateTransactions();" type="button">
             Deposit Funds
@@ -141,18 +138,16 @@
             <option value="checking">Checking</option>
             <option value="saving">Saving</option>
             <option value="credit">Credit</option>
+            <option value="loan">Loan</option>
         </select>
         <br>
         <!-- Withdraw Field -->
         <label for="withdrawAmt">Amount</label>
-        <input type="number" id="withdrawAmt" name="withdrawAmt"
-            oninput="javascript: if (this.value > 500) error.textContent = 'Please enter a value that is less than 500.'">
+        <input type="number" id="withdrawAmt" name="withdrawAmt">
 
-        <div id="error"></div>
-
-        <!-- Desc Field -->
-        <label for="getRecentDesc">Description</label>
-        <input type="text" id="getRecentDesc" name="getRecentDesc" placeholder="Short Description">
+        <!-- Request Credit Score Field -->
+        <label for="creditScore">Credit Score (Required for Credit Accounts)</label>
+        <input type="number" id="creditScore" name="creditScore" placeholder="3-Number Credit Score">
 
         <button onclick="credit(); showClicks(); calculateTransactions();" type="button">
             Withdraw Funds
@@ -165,10 +160,10 @@
         <!-- Select Account to transfer to -->
         <label for="transferTo">Transfer To Account: </label>
         <select name="transferTo" id="transferTo">
-            <option value="checking">checking</option>
-            <option value="saving">saving</option>
-            <option value="credit">credit</option>
-            <option value="loan">loan</option>
+            <option value="checking">Checking</option>
+            <option value="saving">Saving</option>
+            <option value="credit">Credit</option>
+            <option value="loan">Loan</option>
         </select>
 
         <br>
@@ -193,21 +188,16 @@
 
     <!-- Account Withdrawal Form -->
     <div id="paymentForm">
-
         <!-- Select Liability Account -->
         <label for="getPaymentTo"></label>
         <select name="getPaymentTo" id="getPaymentTo">
-            <option value="creditPayment">Credit</option>
-            <option value="loanPayment">Loan</option>
+            <option value="credit">Credit</option>
+            <option value="loan">Loan</option>
         </select>
         <br>
         <!-- Payment Field -->
-        <label for="getPaymentAmt">Amount</label>
-        <input type="number" id="getPaymentAmt" name="getPaymentAmt" value="0.00">
-
-        <!-- Desc Field -->
-        <label for="getRecentPayDesc">Description</label>
-        <input type="text" id="getRecentPayDesc" name="getRecentPayDesc" placeholder="Short Description">
+        <label for="paymentAmt">Amount</label>
+        <input type="number" id="paymentAmt" name="paymentAmt" value="0.00">
 
         <button onclick="payment(); showClicks(); calculateTransactions();" type="button">
             Submit Payment
@@ -239,27 +229,22 @@
             <tr>
                 <th>Type</th>
                 <th>Balance</th>
-                <th>Description</th>
             </tr>
             <tr>
                 <td>Checking</td>
                 <td id="checkingAmt"></td>
-                <td id="recentCkDesc"></td>
             </tr>
             <tr>
                 <td>Savings</td>
                 <td id="savingAmt"></td>
-                <td id="recentSvDesc"></td>
             </tr>
             <tr>
                 <td>Credit Card</td>
                 <td id="creditAmt"></td>
-                <td id="recentCCDesc"></td>
             </tr>
             <tr>
                 <td>Loan</td>
                 <td id="loanAmt"></td>
-                <td id="recentLoanDesc"></td>
             </tr>
 
         </table>
@@ -267,10 +252,12 @@
         <div id="transaction"></div>
     </div>
 
+    <!-- Bid User Farewell When 10 Transactions Are Reached -->
     <div id="goodbyeUser">
         Thank you so much for using our application! Want to try again?
     </div>
 
+    <!-- Reload The Page -->
     <button id="reload" onclick="reloadPage()">
         Click Here to Try Again!
     </button>
