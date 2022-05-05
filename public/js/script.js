@@ -888,7 +888,7 @@ function transfer() {
  * [ ] Create a payment function
  */
 function payment() {
-
+  paymentForm.style.display = "none";
 }
 var count = 1;
 function showClicks() {
@@ -900,6 +900,10 @@ function showClicks() {
 function calculateTransactions() {
   var clicks = document.getElementById('documentButtonPresses').innerHTML;
   if (clicks > 10) {
+    dynamicMessage.style.display = "none";
+    dashboard.style.display = "none";
+    buttonCount.style.display = "none";
+
     goodbyeUser.style.display = "block";
     reload.style.display = "block"
   }
