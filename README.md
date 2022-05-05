@@ -5,31 +5,22 @@ Confirm that you have node installed using a terminal.
 node --version
 ```
 
-Confirm that you have npm installed using a terminal.
+If there is not node js, run the following: 
 ```
-npm --version
-```
-
-Create a project folder using your terminal:
-```
-mkdir ProjectName
+sudo apt install node.js
 ```
 
-Navigate inside the project:
+Within the project main directory, run server.js
 ```
-cd ProjectName
-```
-
-Create a package.json file using Node Package Manager initialization (npm init) and hit return on everything unless you would like to provide details:
-```
-npm init
+node server.js
 ```
 
-Install all the packages that you are going to use in your project.  When you install them, they will be listed in the package.json file.  I listed the packages that I will use in this project.
+When you see Server running on port 5000, open a web brower and navigate to http://localhost:5000
+
+Install all the packages that you are going to use in your project.
 
 * npm install uuid (To generate random IDs)
 * npm install -D nodemon (So you don't have to restart the node server.)
-* 
 
 Node comess with core Modules (path, fs, https, etc) that you do not have to install. 
 
@@ -40,8 +31,4 @@ Custom modules
 Create a variable and required the path of the module that you would like to use.
 ```
 const path = require('path');
-```
-### If you would like to use a file:
-```
-const myFile = require('./myfile');
 ```
