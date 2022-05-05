@@ -5,7 +5,7 @@ Confirm that you have node installed using a terminal.
 node --version
 ```
 
-If there is not node js, run the following: 
+If you do not have node.js installed, run the following: 
 ```
 sudo apt install node.js
 ```
@@ -30,5 +30,5 @@ Custom modules
 ### If you would like to use a module:
 Create a variable and required the path of the module that you would like to use.
 ```
-const path = require('path');
+const path = requi re('path');
 ```
