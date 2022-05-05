@@ -11,13 +11,13 @@
     <script src="js/script.js" type="application/javascript"></script>
 </head>
 
-<body>
+<body>\
 
     <!-- Hero -->
     <div class="hero-image">
         <div class="hero-text">
-            <h1>Lopez Bank</h1>
-            <p>Best Bank Ever</p>
+            <h1>DSCB Bank</h1>
+            <p>By David Lopez</p>
         </div>
     </div>
 
@@ -28,15 +28,16 @@
 
             <!-- A register button for users that do not have a  -->
             <li><a id="register" type="button" onclick="registerNavLink()">Register</a></li>
-
-            <!-- Login and Register account div -->
-            <li><a id="logout" type="button" onclick="logoutNavLink()">Logout</a></li>
-
         </ul>
-
     </nav>
 
     <br>
+
+    <!-- Document Button Presses -->
+    <div id="buttonCount" onclick="calculateTransactions()">
+        You have this many button presses out of 10 total:
+        <p id="documentButtonPresses"></p>
+    </div>
 
     <!-- Dynamic Message -->
     <div id="dynamicMessage"></div>
@@ -60,7 +61,7 @@
 
             <!-- PIN Field -->
             <label for="getPin">Pin</label>
-            <input type="text" id="getPin" name="getPin">
+            <input type="number" id="getPin" name="getPin">
         </fieldset>
 
         <fieldset>
@@ -73,11 +74,11 @@
             <input type="text" id="getSaving" name="getSaving" value="0.00">
 
             <!-- Credit Account Field -->
-            <label for="getCredit">Credit Card</label>
+            <label for="getCredit">Credit Card Debt</label>
             <input type="text" id="getCredit" name="getCredit" value="0.00">
 
             <!-- Loan Account Field -->
-            <label for="getLoan">Loan</label>
+            <label for="getLoan">Car Loan / Boat Loan <br> / Mortgage Debt</label>
             <input type="text" id="getLoan" name="getLoan" value="0.00">
 
         </fieldset>
@@ -89,9 +90,8 @@
     </div>
 
     <!-- Login Form -->
-
     <div id="loginForm">
-        <h3 ></h3>
+        <h3></h3>
 
         <fieldset>
             <!-- Username Field -->
@@ -100,7 +100,7 @@
 
             <!-- Last Name Field -->
             <label for="pin">Pin</label>
-            <input type="text" id="pin" name="pin">
+            <input type="number" id="pin" name="pin">
         </fieldset>
 
         <button onclick="loginUser()" type="button">
@@ -112,50 +112,51 @@
     <div id="depositForm">
 
         <!-- Select Account -->
-        <label for="depositFormAccount">Which Account: </label>
-        <select name="depositFormAccount" id="depositFormAccount">
-            <option value="checking">checking</option>
-            <option value="saving">saving</option>
+        <label for="depositIntoAccount">Which Account: </label>
+        <select name="depositIntoAccount" id="depositIntoAccount">
+            <option value="checking">Checking</option>
+            <option value="saving">Saving</option>
         </select>
         <br>
         <!-- Deposit Field -->
         <label for="depositAmt">Amount</label>
-        <input type="text" id="depositAmt" name="depositAmt" value="0.00">
+        <input type="number" id="depositAmt" name="depositAmt" value="0.00" min="0.00" max="5000.00">
 
         <!-- Desc Field -->
         <label for="getRecentDesc">Description</label>
         <input type="text" id="getRecentDesc" name="getRecentDesc" placeholder="Short Description">
 
-        <button onclick="debit()" type="button">
+        <button onclick="debit(); showClicks(); calculateTransactions();" type="button">
             Deposit Funds
         </button>
 
     </div>
 
-    <!-- Account Withdrawal Form -->
+    <!-- Account Withdraw Form -->
     <div id="withdrawForm">
 
         <!-- Select Account -->
-        <label for="withdrawForm"></label>
-        <select name="withdrawForm" id="withdrawForm">
-            <option value="checkingWithdraw">checking</option>
-            <option value="savingWithdraw">saving</option>
-            <option value="creditWithdraw">credit</option>
-            <option value="loanWithdraw">loan</option>
+        <label for="withdrawFromAccount">Which Account: </label>
+        <select name="withdrawFromAccount" id="withdrawFromAccount">
+            <option value="checking">Checking</option>
+            <option value="saving">Saving</option>
+            <option value="credit">Credit</option>
         </select>
         <br>
         <!-- Withdraw Field -->
         <label for="withdrawAmt">Amount</label>
-        <input type="text" id="withdrawAmt" name="withdrawAmt" value="0.00">
+        <input type="number" id="withdrawAmt" name="withdrawAmt"
+            oninput="javascript: if (this.value > 500) error.textContent = 'Please enter a value that is less than 500.'">
+
+        <div id="error"></div>
 
         <!-- Desc Field -->
-        <label for="getRecentCCDesc">Description</label>
-        <input type="text" id="getRecentCCDesc" name="getRecentCCDesc" placeholder="Short Description">
+        <label for="getRecentDesc">Description</label>
+        <input type="text" id="getRecentDesc" name="getRecentDesc" placeholder="Short Description">
 
-        <button onclick="credit()" type="button">
+        <button onclick="credit(); showClicks(); calculateTransactions();" type="button">
             Withdraw Funds
         </button>
-
     </div>
 
     <!-- Account Transfer Form -->
@@ -164,26 +165,26 @@
         <!-- Select Account to transfer to -->
         <label for="transferTo">Transfer To Account: </label>
         <select name="transferTo" id="transferTo">
-            <option value="checkingTransferTo">checking</option>
-            <option value="savingTransferTo">saving</option>
-            <option value="creditTransferTo">credit</option>
-            <option value="loanTransferTo">loan</option>
+            <option value="checking">checking</option>
+            <option value="saving">saving</option>
+            <option value="credit">credit</option>
+            <option value="loan">loan</option>
         </select>
 
         <br>
-        
+
         <!-- Select Account to transfer from-->
         <label for="transferFrom">Transfer From Account: </label>
         <select name="transferFrom" id="transferFrom">
-            <option value="checkingTransferFrom">checking</option>
-            <option value="savingTransferFrom">saving</option>
-            <option value="creditTransferFrom">credit</option>
-            <option value="loanTransferFrom">loan</option>
+            <option value="checking">Checking</option>
+            <option value="saving">Saving</option>
+            <option value="credit">Credit</option>
+            <option value="loan">Loan</option>
         </select>
         <br>
         <!-- Withdraw Field -->
         <label for="transferAmt">Amount</label>
-        <input type="text" id="transferAmt" name="transferAmt" value="0.00">
+        <input type="number" id="transferAmt" name="transferAmt" value="0.00">
 
         <button onclick="transfer()" type="button">
             Transfer Funds
@@ -202,18 +203,19 @@
         <br>
         <!-- Payment Field -->
         <label for="getPaymentAmt">Amount</label>
-        <input type="text" id="getPaymentAmt" name="getPaymentAmt" value="0.00">
+        <input type="number" id="getPaymentAmt" name="getPaymentAmt" value="0.00">
 
         <!-- Desc Field -->
         <label for="getRecentPayDesc">Description</label>
         <input type="text" id="getRecentPayDesc" name="getRecentPayDesc" placeholder="Short Description">
 
-        <button onclick="payment()" type="button">
+        <button onclick="payment(); showClicks(); calculateTransactions();" type="button">
             Submit Payment
         </button>
 
     </div>
 
+    <!-- Show Account Contents -->
     <div id="dashboard">
         <h4>Accounts</h4>
         <nav>
@@ -264,6 +266,14 @@
 
         <div id="transaction"></div>
     </div>
+
+    <div id="goodbyeUser">
+        Thank you so much for using our application! Want to try again?
+    </div>
+
+    <button id="reload" onclick="reloadPage()">
+        Click Here to Try Again!
+    </button>
 </body>
 
 </html>

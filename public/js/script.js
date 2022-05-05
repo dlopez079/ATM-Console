@@ -1,5 +1,5 @@
 /**
- * USER NANAGMENT
+ * USER MANAGMENT
  * Array where users information will be saved. 
  * When using arrays, the user information will only be saved temporarily.  You will have to use a database to store filed values for a longer period of time.
  * Once your refresh the page, you will lose the information that was stored in the below array.
@@ -19,7 +19,6 @@ function displayLoginBtn() {
   // Change style to none to remove li
   loginBtn.style.display = "block";
   registerBtn.style.display = "none";
-  logoutBtn.style.display = "none";
 
 }
 
@@ -50,16 +49,17 @@ function displayLoginForm() {
 
 }
 
+/** REMOVE LOGIN
+ * Function to remove login button from view 
+ */
 function removeLoginBtn() {
-  
+
   // Save form IDs to a variable
   let registerbtn = document.getElementById('register');
   let loginBtn = document.getElementById('login');
-  let logoutBtn = document.getElementById('logout');
 
   registerbtn.style.display = "none";
   loginBtn.style.display = "none";
-  logoutBtn.style.display = "block";
 }
 
 /** REGISTER BUTTON
@@ -356,7 +356,7 @@ function registerUser() {
 }
 
 /**
- * ACCOUNT NANAGMENT **********************************************************************************
+ * ACCOUNT MANAGMENT **********************************************************************************
  * When using arrays, the user information will only be saved temporarily.  You will have to use a database to store filed values for a longer period of time.
  * Once your refresh the page, you will lose the information that was stored in the below array.
  */
@@ -373,7 +373,7 @@ function depositDashNavLink() {
 }
 
 /**
- * Function to withdraw ammount into one of the user's account.  Users should open account with at least 1 account active.
+ * Function to withdraw amount into one of the user's account.  Users should open account with at least 1 account active.
  */
 function withdrawDashNavLink() {
   // Display transaction form
@@ -408,20 +408,20 @@ function debit() {
   let loanBalance = Number(users[0].loan);
 
   // Retrieve input values
-  let account = document.getElementById('depositFormAccount').value;
+  let account = document.getElementById('depositIntoAccount').value;
   let depositAmt = Number(document.getElementById('depositAmt').value);
   let getRecentDesc = document.getElementById('getRecentDesc').value;
 
   // Created a switch to taking in account and perform the operations accordingly.
   switch (account) {
 
-    // Checking Switch.  If the account variable has a string value of checking, then perform the code under case until break point.
+    // Checking Switch. If the account variable has a string value of checking, then perform the code under case until break point.
     case 'checking':
 
       // Perform the Math
       let newCheckingBal = checkingBalance + depositAmt;
 
-      // Change the value of he checking account on table.
+      // Change the value of the checking account on table.
       users[0].checking = newCheckingBal;
 
       // Display Checking Amount
@@ -441,6 +441,7 @@ function debit() {
         "Desc": getRecentDesc,
         "Total": checkingTotal
       });
+
       break;
 
     case 'saving':
@@ -448,7 +449,7 @@ function debit() {
       // Perform the Math
       let newSavingBal = savingBalance + depositAmt;
 
-      // Change the value of he checking account on table.
+      // Change the value of the checking account on table.
       users[0].saving = newSavingBal;
 
       // Display Saving Amount
@@ -528,7 +529,7 @@ function debit() {
       break;
   }
 
-  // Change Dyamic Message to welcome
+  // Change Dynamic Message
   document.getElementById('dynamicMessage').innerHTML = `Successful Deposit!`;
 
 }
@@ -536,118 +537,347 @@ function debit() {
 function credit() {
 
   // Retrieve all accounts for logged in user.
+  // Data from array must be in Number method.
   let checkingBalance = Number(users[0].checking);
-  let savingBalance = users[0].saving;
-  let creditBalance = users[0].credit;
-  let loanBalance = users[0].loan;
+  let savingBalance = Number(users[0].saving);
+  let creditBalance = Number(users[0].credit);
 
   // Retrieve input values
-  let account = document.getElementById('depositFormAccount').value;
-  let withdrawAmt = Number(document.getElementById('depositAmt').value);
+  let account = document.getElementById('withdrawFromAccount').value;
+  let withdrawAmt = Number(document.getElementById('withdrawAmt').value);
   let getRecentDesc = document.getElementById('getRecentDesc').value;
-
-  // Console Verification
-  let total = checkingBalance - withdrawAmt;
-  console.table({
-    "Balance": checkingBalance,
-    "Deposit": withdrawAmt,
-    "Desc": getRecentDesc,
-    "Total": total
-  });
-
 
   // Created a switch to taking in account and perform the operations accordingly.
   switch (account) {
+
+    // Checking Switch.  If the account variable has a string value of checking, then perform the code under case until break point.
     case 'checking':
 
       // Perform the Math
-      let newCheckingBal = checkingBalance + depositAmt;
+      let newCheckingBal = checkingBalance - withdrawAmt;
 
-      // Change the value of he checking account on table.
+      // Change the value of the checking account on table.
       users[0].checking = newCheckingBal;
 
       // Display Checking Amount
-      document.getElementById('checkingAmt').innerHTML = users[0].checking;
+      document.getElementById('checkingAmt').innerHTML = `$ ${users[0].checking.toFixed(2)}`;
 
       // Display Recent Description
-      document.getElementById('recentChDesc').innerHTML = getRecentDesc;
+      document.getElementById('recentCkDesc').innerHTML = getRecentDesc;
 
-      // Remove Deposit Display from DOM
-      removeDepositForm();
+      // Remove Withdraw Display from DOM
+      removeWithdrawalForm();
+
+      // Test Checking Switch with console.table *******
+      let checkingTotal = checkingBalance - withdrawAmt;
+      console.table({
+        "Balance": checkingBalance,
+        "Withdraw": withdrawAmt,
+        "Desc": getRecentDesc,
+        "Total": checkingTotal
+      });
       break;
 
     case 'saving':
 
       // Perform the Math
-      let newSavingBal = savingBalance + depositAmt;
+      let newSavingBal = savingBalance - withdrawAmt;
 
-      // Change the value of he checking account on table.
+      // Change the value of the checking account on table.
       users[0].saving = newSavingBal;
 
       // Display Saving Amount
-      document.getElementById('savingAmt').innerHTML = users[0].saving;
+      document.getElementById('savingAmt').innerHTML = `$ ${users[0].saving.toFixed(2)}`;
 
       // Display Recent Description
       document.getElementById('recentSvDesc').innerHTML = getRecentDesc;
 
-      // Remove Deposit Display from DOM
-      removeDepositForm();
+      // Remove Withdraw Display from DOM
+      removeWithdrawalForm();
+
+      // Test Checking Switch with console.table *******
+      let savingTotal = savingBalance - withdrawAmt;
+      console.table({
+        "Balance": savingBalance,
+        "Withdraw": withdrawAmt,
+        "Desc": getRecentDesc,
+        "Total": savingTotal
+      });
       break;
 
     case 'credit':
 
       // Perform the Math
-      let newCreditBal = creditBalance + depositAmt;
+      let newCreditBal = creditBalance + withdrawAmt;
 
       // Change the value of he checking account on table.
       users[0].credit = newCreditBal;
 
       // Display Saving Amount
-      document.getElementById('creditAmt').innerHTML = users[0].credit;
+      document.getElementById('creditAmt').innerHTML = `$ ${users[0].credit.toFixed(2)}`;
 
       // Display Recent Description
       document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
 
-      // Remove Deposit Display from DOM
-      removeDepositForm();
-      break;
+      // Remove Withdraw Display from DOM
+      removeWithdrawalForm();
 
-    case 'loan':
-
-      // Perform the Math
-      let newLoanBal = loanBalance + depositAmt;
-
-      // Change the value of he Loan account on table.
-      users[0].loan = newLoanBal;
-
-      // Display Saving Amount
-      document.getElementById('loanAmt').innerHTML = users[0].loan;
-
-      // Display Recent Description
-      document.getElementById('recentLoanDesc').innerHTML = getRecentDesc;
-
-      // Remove Deposit Display from DOM
-      removeDepositForm();
+      // Test Checking Switch with console.table *******
+      let creditTotal = creditBalance + withdrawAmt;
+      console.table({
+        "Balance": creditBalance,
+        "Withdraw": withdrawAmt,
+        "Desc": getRecentDesc,
+        "Total": creditTotal
+      });
       break;
 
     default:
       break;
   }
 
-  // Change Dyamic Message to welcome
-  document.getElementById('dynamicMessage').innerHTML = `Successful Deposit!`;
+  // Change Dynamic Message
+  document.getElementById('dynamicMessage').innerHTML = `Successful Withdrawal!`;
 
 }
 
-/**
- * Tranfers will be a combination of
- * debit()
- * credit()
- * [x] Create btn for Transfers
- * [ ] Create a displayTransferForm Function
- * [ ] Create a transfer function for the math.
- */
 function transfer() {
+  // Retrieve all accounts for logged in user.
+  // Data from array must be in Number method.
+  let checkingBalance = Number(users[0].checking);
+  let savingBalance = Number(users[0].saving);
+  let creditBalance = Number(users[0].credit);
+  let loanBalance = Number(users[0].loan);
+
+  // Retrieve input values
+  let account1 = document.getElementById('transferTo').value;
+  let account2 = document.getElementById('transferFrom').value;
+  let transferAmt = Number(document.getElementById('transferAmt').value);
+  let getRecentDesc = document.getElementById('getRecentDesc').value;
+
+  // Created a switch to taking in account and perform the operations accordingly.
+  switch (account1) {
+
+    // Checking Switch. If the account variable has a string value of checking, then perform the code under case until break point.
+    case 'checking':
+
+      // Perform the Math
+      let newCheckingBal = checkingBalance + transferAmt;
+
+      // Change the value of the checking account on table.
+      users[0].checking = newCheckingBal;
+
+      // Display Checking Amount
+      document.getElementById('checkingAmt').innerHTML = `$ ${users[0].checking.toFixed(2)}`;
+
+      // Display Recent Description
+      document.getElementById('recentCkDesc').innerHTML = getRecentDesc;
+
+      // Test Checking Switch with console.table *******
+      let checkingTotal = checkingBalance + transferAmt;
+      console.table({
+        "Balance": checkingBalance,
+        "Deposit": transferAmt,
+        "Desc": getRecentDesc,
+        "Total": checkingTotal
+      });
+
+      break;
+
+    case 'saving':
+
+      // Perform the Math
+      let newSavingBal = savingBalance + transferAmt;
+
+      // Change the value of the checking account on table.
+      users[0].saving = newSavingBal;
+
+      // Display Saving Amount
+      document.getElementById('savingAmt').innerHTML = `$ ${users[0].saving.toFixed(2)}`;
+
+      // Display Recent Description
+      document.getElementById('recentSvDesc').innerHTML = getRecentDesc;
+
+      // Test Checking Switch with console.table *******
+      let savingTotal = savingBalance + transferAmt;
+      console.table({
+        "Balance": savingBalance,
+        "Deposit": transferAmt,
+        "Desc": getRecentDesc,
+        "Total": savingTotal
+      });
+      break;
+
+    case 'credit':
+
+      // Perform the Math
+      let newCreditBal = creditBalance + transferAmt;
+
+      // Change the value of he checking account on table.
+      users[0].credit = newCreditBal;
+
+      // Display Saving Amount
+      document.getElementById('creditAmt').innerHTML = `$ ${users[0].credit.toFixed(2)}`;
+
+      // Display Recent Description
+      document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
+
+      // Test Checking Switch with console.table *******
+      let creditTotal = creditBalance + transferAmt;
+      console.table({
+        "Balance": creditBalance,
+        "Deposit": transferAmt,
+        "Desc": getRecentDesc,
+        "Total": creditTotal
+      });
+      break;
+
+    case 'loan':
+
+      // Perform the Math
+      let newLoanBal = loanBalance + transferAmt;
+
+      // Change the value of he checking account on table.
+      users[0].loan = newLoanBal;
+
+      // Display Saving Amount
+      document.getElementById('loanAmt').innerHTML = `$ ${users[0].loan.toFixed(2)}`;
+
+      // Display Recent Description
+      document.getElementById('recentLoanDesc').innerHTML = getRecentDesc;
+
+      // Test Checking Switch with console.table *******
+      let loanTotal = loanBalance + transferAmt;
+      console.table({
+        "Balance": loanBalance,
+        "Deposit": transferAmt,
+        "Desc": getRecentDesc,
+        "Total": loanTotal
+      });
+      break;
+
+    default:
+      break;
+  }
+
+  // Created a switch to taking in account and perform the operations accordingly.
+  switch (account2) {
+
+    // Checking Switch.  If the account variable has a string value of checking, then perform the code under case until break point.
+    case 'checking':
+
+      // Perform the Math
+      let newCheckingBal = checkingBalance - transferAmt;
+
+      // Change the value of the checking account on table.
+      users[0].checking = newCheckingBal;
+
+      // Display Checking Amount
+      document.getElementById('checkingAmt').innerHTML = `$ ${users[0].checking.toFixed(2)}`;
+
+      // Display Recent Description
+      document.getElementById('recentCkDesc').innerHTML = getRecentDesc;
+
+      // Remove Withdraw Display from DOM
+      removeTransferForm();
+
+      // Test Checking Switch with console.table *******
+      let checkingTotal = checkingBalance - transferAmt;
+      console.table({
+        "Balance": checkingBalance,
+        "Withdraw": transferAmt,
+        "Desc": getRecentDesc,
+        "Total": checkingTotal
+      });
+      break;
+
+    case 'saving':
+
+      // Perform the Math
+      let newSavingBal = savingBalance - transferAmt;
+
+      // Change the value of the checking account on table.
+      users[0].saving = newSavingBal;
+
+      // Display Saving Amount
+      document.getElementById('savingAmt').innerHTML = `$ ${users[0].saving.toFixed(2)}`;
+
+      // Display Recent Description
+      document.getElementById('recentSvDesc').innerHTML = getRecentDesc;
+
+      // Remove Withdraw Display from DOM
+      removeTransferForm();
+
+      // Test Checking Switch with console.table *******
+      let savingTotal = savingBalance - transferAmt;
+      console.table({
+        "Balance": savingBalance,
+        "Withdraw": transferAmt,
+        "Desc": getRecentDesc,
+        "Total": savingTotal
+      });
+      break;
+
+    case 'credit':
+
+      // Perform the Math
+      let newCreditBal = creditBalance + transferAmt;
+
+      // Change the value of he checking account on table.
+      users[0].credit = newCreditBal;
+
+      // Display Saving Amount
+      document.getElementById('creditAmt').innerHTML = `$ ${users[0].credit.toFixed(2)}`;
+
+      // Display Recent Description
+      document.getElementById('recentCCDesc').innerHTML = getRecentDesc;
+
+      // Remove Withdraw Display from DOM
+      removeTransferForm();
+
+      // Test Checking Switch with console.table *******
+      let creditTotal = creditBalance + transferAmt;
+      console.table({
+        "Balance": creditBalance,
+        "Withdraw": transferAmt,
+        "Desc": getRecentDesc,
+        "Total": creditTotal
+      });
+      break;
+
+    case 'loan':
+
+      // Perform the Math
+      let newLoanBal = loanBalance + transferAmt;
+
+      // Change the value of he checking account on table.
+      users[0].loan = newLoanBal;
+
+      // Display Saving Amount
+      document.getElementById('loanAmt').innerHTML = `$ ${users[0].loan.toFixed(2)}`;
+
+      // Display Recent Description
+      document.getElementById('recentLoanDesc').innerHTML = getRecentDesc;
+
+      // Remove Deposit Display from DOM
+      removeTransferForm();
+
+      // Test Checking Switch with console.table *******
+      let loanTotal = loanBalance + transferAmt;
+      console.table({
+        "Balance": loanBalance,
+        "Deposit": transferAmt,
+        "Desc": getRecentDesc,
+        "Total": loanTotal
+      });
+      break;
+
+    default:
+      break;
+  }
+
+  // Change Dynamic Message
+  document.getElementById('dynamicMessage').innerHTML = `Successful Transfer!`;
 
 }
 /**
@@ -659,4 +889,23 @@ function transfer() {
  */
 function payment() {
 
+}
+var count = 1;
+function showClicks() {
+  document.getElementById("documentButtonPresses").innerHTML = count++;
+  buttonCount.style.display = "block";
+}
+
+//function to limit transactions
+function calculateTransactions() {
+  var clicks = document.getElementById('documentButtonPresses').innerHTML;
+  if (clicks > 10) {
+    goodbyeUser.style.display = "block";
+    reload.style.display = "block"
+  }
+}
+
+//function to reload page
+function reloadPage() {
+  location.reload();
 }
